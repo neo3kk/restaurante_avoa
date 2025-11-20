@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVOA Restaurante - Menú Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header" style="position: relative; background: white; padding: 2rem 0;">
+        <div class="container"
+            style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 1rem;">
+            <!-- Tentacle Image -->
+            <img src="pataCalamar.png" onerror="this.src='https://placehold.co/100x100/d4af37/0f172a?text=Tentaculo'"
+                alt="Tentáculo" style="height: 120px; width: auto; object-fit: contain; transform: rotate(-15deg);">
+
+            <!-- Text Group -->
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <div class="logo" style="color: var(--color-primary); font-size: 4rem; line-height: 1;">
+                    <span>Λ</span><span style="margin-left: -0.12em;">V</span><span
+                        style="margin-left: 0.08em;">O</span><span style="margin-left: 0.05em;">Λ</span>
+                </div>
+                <p
+                    style="color: var(--color-secondary); font-family: var(--font-heading); letter-spacing: 0.3em; text-transform: uppercase; font-size: 0.9rem; border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 0.5rem; width: 100%; text-align: center;">
+                    Restaurante</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 3rem; padding-bottom: 4rem;">
+
+        <div class="menu-intro">
+            <p>Sabores de origen. Excelencia en el producto.</p>
+        </div>
+
+        <div class="menu-columns">
+            <!-- Columna 1 -->
+            <div class="menu-column">
+                <!-- Entrantes -->
+                <section class="menu-section">
+                    <div class="section-header">
+                        <h2 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 2rem;">
+                            Entrantes</h2>
+                    </div>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Empanada Gallega</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">7€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Ensalada Bonito</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">21€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name" style="color: var(--color-primary); font-weight: 600;">Pulpo a
+                                Feira</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">28€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Anchoas 00</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">4€ <span class="unit-price">/ud</span></span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Zamburiñas</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">28€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Jamón Ibérico</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">35€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Tirabeques</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">14€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Queso con Anchoas</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">5€ <span class="unit-price">/ud</span></span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Croquetas de Ibérico</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">4€ <span class="unit-price">/ud</span></span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Buñuelos <span style="font-size: 0.8em; color: #888;">(Bacalao
+                                    / Merluza)</span></span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">4€ <span class="unit-price">/ud</span></span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Calamar de Potera</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">30€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Alcachofas</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">9€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name" style="color: var(--color-primary);">Angulas</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price"
+                                style="font-size: 0.9rem; font-weight: 400; font-style: italic; color: #888;">Precio
+                                según mercado</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Platos Calientes -->
+                <section class="menu-section" style="margin-top: 3rem;">
+                    <div class="section-header">
+                        <h2 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 2rem;">
+                            Platos Calientes</h2>
+                    </div>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <div style="display: flex; flex-direction: column;">
+                                <span class="menu-item-name">Alubias</span>
+                                <span class="menu-item-desc">con Almejas o Pulpo</span>
+                            </div>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">30€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Caldo Gallego</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">7€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Callos</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">16€</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Columna 2 -->
+            <div class="menu-column">
+                <!-- Principales (Pescados) -->
+                <section class="menu-section">
+                    <div class="section-header">
+                        <h2 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 2rem;">
+                            Principales</h2>
+                        <span class="section-tag">Pescados</span>
+                    </div>
+
+                    <div class="fish-grid">
+                        <p class="fish-note">Selección fresca del día. Precio Según Mercado (PSM).</p>
+                        <span class="fish-item">Lubina</span>
+                        <span class="fish-item">Rodaballo</span>
+                        <span class="fish-item">Merluza</span>
+                        <span class="fish-item">Lenguado</span>
+                        <span class="fish-item">Gallo</span>
+                        <span class="fish-item">Centolla</span>
+                        <span class="fish-item" style="grid-column: 1 / -1;">Bogavante</span>
+                    </div>
+                </section>
+
+                <!-- Principales (Carnes) -->
+                <section class="menu-section" style="margin-top: 3rem;">
+                    <div class="section-header">
+                        <h2 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 2rem;">
+                            Carnes</h2>
+                    </div>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Zorza con Patatas</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">20€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Solomillo Ternera Blanca</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">29€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name" style="color: var(--color-primary); font-weight: 600;">Chuleton
+                                Madurado</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">104€</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Entrecot Madurado</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">35€</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Postres -->
+                <section class="menu-section" style="margin-top: 3rem;">
+                    <div class="section-header">
+                        <h2 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 2rem;">
+                            Postres</h2>
+                    </div>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Filloas</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cañitas</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Queso Arzua con Membrillo</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Tarta de Santiago</span>
+                        </li>
+                        <li class="menu-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                            <span class="menu-item-name" style="color: var(--color-primary); font-weight: 600;">Tarta de
+                                Queso</span>
+                            <span class="price-line"></span>
+                            <span class="menu-item-price">8€</span>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" style="background-color: var(--color-bg-light); color: var(--color-text); padding: 4rem 0;">
+        <div class="container" style="text-align: center; max-width: 600px;">
+            <!-- SVG Map -->
+            <svg class="map-svg" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,60 Q10,50 20,30 T40,20 T60,40 T50,70 Z" stroke="currentColor" stroke-width="2"
+                    fill="none" />
+                <path d="M250,30 Q270,20 280,40 T260,70 T240,60 Z" stroke="currentColor" stroke-width="2" fill="none" />
+                <path d="M50,50 C100,10 150,90 240,50" stroke="currentColor" stroke-width="1.5"
+                    stroke-dasharray="4 4" />
+                <path d="M145,50 L155,45 L150,55 Z" fill="currentColor" transform="rotate(15, 150, 50)" />
+            </svg>
+
+            <p
+                style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+                Del Origen a Tu Mesa</p>
+            <p style="font-size: 0.9rem; color: #888; margin-bottom: 2rem;">Impuestos incluidos. Consulte alérgenos con
+                nuestro personal.</p>
+
+            <div style="font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px;">
+                &copy; 2025 AVOA Restaurante
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

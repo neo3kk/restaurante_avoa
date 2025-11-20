@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Restaurante Avoa: El mejor pescado y marisco fresco en el centro de Palma de Mallorca. Una experiencia gastronómica mediterránea única.">
+    <title>Restaurante Avoa | Pescado y Marisco en Palma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo" aria-label="Restaurante Avoa"><span class="inverted-v">V</span>VO<span
+                    class="inverted-v">V</span></a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                    <li><a href="#menu" class="nav-link">Menú</a></li>
+                    <li><a href="#contacto" class="nav-link btn-reserve">Reservar</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-bg">
+                <img src="assets/images/hero.png" alt="Mariscada fresca con vino blanco" loading="eager">
+            </div>
+            <div class="hero-content container">
+                <h1 class="hero-title">La Esencia del <span class="highlight">Mediterráneo</span></h1>
+                <p class="hero-subtitle">Pescado y marisco fresco en el corazón de Palma de Mallorca.</p>
+                <div class="hero-actions">
+                    <a href="#contacto" class="btn btn-primary">Reservar Mesa</a>
+                    <a href="carta.html" class="btn btn-outline">Ver Carta</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="about section">
+            <div class="container about-grid">
+                <div class="about-image">
+                    <img src="assets/images/interior.png" alt="Interior del Restaurante Avoa">
+                </div>
+                <div class="about-text">
+                    <h2 class="section-title">Nuestra Historia</h2>
+                    <p>En <strong>Restaurante Avoa</strong>, nos dedicamos a traer lo mejor del mar a su mesa. Situados
+                        en el vibrante centro de Palma, ofrecemos una experiencia culinaria que combina la tradición
+                        marinera con un toque moderno y sofisticado.</p>
+                    <p>La excelencia es nuestra norma. Por ello, nuestro marisco viaja diariamente en avión desde las
+                        mejores lonjas de Galicia hasta su mesa en Palma, garantizando una frescura absoluta y el
+                        auténtico sabor del Atlántico.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu-preview section bg-light">
+            <div class="container">
+                <h2 class="section-title text-center">Nuestras Especialidades</h2>
+                <p class="section-subtitle text-center">Sabores auténticos preparados con maestría</p>
+
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="card-image">
+                            <img src="assets/images/dish.png" alt="Lubina a la parrilla">
+                        </div>
+                        <div class="card-content">
+                            <h3>Lubina Salvaje</h3>
+                            <p>A la parrilla con verduras de temporada y aceite de oliva virgen extra.</p>
+                            <span class="price">28€</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="card-image">
+                            <!-- Usamos la misma imagen por ahora, idealmente serían diferentes -->
+                            <img src="assets/images/hero.png" style="object-fit: cover;" alt="Mariscada Real">
+                        </div>
+                        <div class="card-content">
+                            <h3>Mariscada Real</h3>
+                            <p>Selección premium de bogavante, gambas rojas y ostras para compartir.</p>
+                            <span class="price">85€</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="card-image">
+                            <img src="assets/images/dish.png" style="filter: hue-rotate(15deg);" alt="Tartar de Atún">
+                        </div>
+                        <div class="card-content">
+                            <h3>Tartar de Atún Rojo</h3>
+                            <p>Con aguacate, sésamo y un toque de cítricos locales.</p>
+                            <span class="price">24€</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="carta.html" class="btn btn-secondary">Ver Menú Completo</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact section">
+            <div class="container contact-wrapper">
+                <div class="contact-info">
+                    <h2 class="section-title">Visítenos</h2>
+                    <p>Estamos ubicados en el centro histórico de Palma.</p>
+
+                    <div class="info-item">
+                        <h3>Dirección</h3>
+                        <p>Carrer del Mar, 12<br>07001 Palma, Illes Balears</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>Horario</h3>
+                        <p>Martes - Domingo: 13:00 - 16:00 | 20:00 - 23:30<br>Lunes: Cerrado</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>Contacto</h3>
+                        <p>Tel: +34 971 123 456<br>Email: reservas@restauranteavoa.com</p>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <h3>Hacer una Reserva</h3>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Teléfono" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="date" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" placeholder="Personas" min="1" max="10" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width">Confirmar Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo" aria-label="Restaurante Avoa"><span class="inverted-v">V</span>VO<span
+                    class="inverted-v">V</span></div>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="Facebook">FB</a>
+                <a href="#" aria-label="TripAdvisor">TA</a>
+            </div>
+            <p class="copyright">&copy; 2024 Restaurante Avoa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('.nav');
+
+        mobileBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileBtn.classList.toggle('active');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                nav.classList.remove('active'); // Close menu on click
+                mobileBtn.classList.remove('active');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
