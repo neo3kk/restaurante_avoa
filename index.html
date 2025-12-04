@@ -18,14 +18,13 @@
 <body>
     <header class="header">
         <div class="container header-container">
-            <a href="#" class="logo" aria-label="Restaurante Avoa"><span class="inverted-v">V</span>VO<span
-                    class="inverted-v">V</span></a>
+            <a href="#" class="logo" aria-label="Restaurante Avoa">ΛVOΛ</a>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                    <li><a href="#menu" class="nav-link">Menú</a></li>
-                    <li><a href="#contacto" class="nav-link btn-reserve">Reservar</a></li>
+                    <li><a href="#inicio" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                    <li><a href="#nosotros" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
+                    <li><a href="#menu" class="nav-link" data-i18n="nav_menu">Menú</a></li>
+                    <li><a href="#contacto" class="nav-link btn-reserve" data-i18n="nav_reservar">Reservar</a></li>
                 </ul>
             </nav>
             <button class="mobile-menu-btn" aria-label="Abrir menú">
@@ -42,11 +41,11 @@
                 <img src="assets/images/hero.png" alt="Mariscada fresca con vino blanco" loading="eager">
             </div>
             <div class="hero-content container">
-                <h1 class="hero-title">La Esencia del <span class="highlight">Mediterráneo</span></h1>
-                <p class="hero-subtitle">Pescado y marisco fresco en el corazón de Palma de Mallorca.</p>
+                <h1 class="hero-title"><span data-i18n="hero_title">La Esencia del</span> <span class="highlight" data-i18n="hero_highlight">Mediterráneo</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Pescado y marisco fresco en el corazón de Palma de Mallorca.</p>
                 <div class="hero-actions">
-                    <a href="#contacto" class="btn btn-primary">Reservar Mesa</a>
-                    <a href="carta.html" class="btn btn-outline">Ver Carta</a>
+                    <a href="#contacto" class="btn btn-primary" data-i18n="btn_reservar_mesa">Reservar Mesa</a>
+                    <a href="carta.html" class="btn btn-outline" data-i18n="btn_ver_carta">Ver Carta</a>
                 </div>
             </div>
         </section>
@@ -57,11 +56,11 @@
                     <img src="assets/images/interior.png" alt="Interior del Restaurante Avoa">
                 </div>
                 <div class="about-text">
-                    <h2 class="section-title">Nuestra Historia</h2>
-                    <p>En <strong>Restaurante Avoa</strong>, nos dedicamos a traer lo mejor del mar a su mesa. Situados
+                    <h2 class="section-title" data-i18n="about_title">Nuestra Historia</h2>
+                    <p data-i18n="about_p1">En <strong>Restaurante Avoa</strong>, nos dedicamos a traer lo mejor del mar a su mesa. Situados
                         en el vibrante centro de Palma, ofrecemos una experiencia culinaria que combina la tradición
                         marinera con un toque moderno y sofisticado.</p>
-                    <p>La excelencia es nuestra norma. Por ello, nuestro marisco viaja diariamente en avión desde las
+                    <p data-i18n="about_p2">La excelencia es nuestra norma. Por ello, nuestro marisco viaja diariamente en avión desde las
                         mejores lonjas de Galicia hasta su mesa en Palma, garantizando una frescura absoluta y el
                         auténtico sabor del Atlántico.</p>
                 </div>
@@ -70,8 +69,8 @@
 
         <section id="menu" class="menu-preview section bg-light">
             <div class="container">
-                <h2 class="section-title text-center">Nuestras Especialidades</h2>
-                <p class="section-subtitle text-center">Sabores auténticos preparados con maestría</p>
+                <h2 class="section-title text-center" data-i18n="specialties_title">Nuestras Especialidades</h2>
+                <p class="section-subtitle text-center" data-i18n="specialties_subtitle">Sabores auténticos preparados con maestría</p>
 
                 <div class="menu-grid">
                     <div class="menu-card">
@@ -79,8 +78,8 @@
                             <img src="assets/images/dish.png" alt="Lubina a la parrilla">
                         </div>
                         <div class="card-content">
-                            <h3>Lubina Salvaje</h3>
-                            <p>A la parrilla con verduras de temporada y aceite de oliva virgen extra.</p>
+                            <h3 data-i18n="dish_lubina">Lubina Salvaje</h3>
+                            <p data-i18n="dish_lubina_desc">A la parrilla con verduras de temporada y aceite de oliva virgen extra.</p>
                             <span class="price">28€</span>
                         </div>
                     </div>
@@ -90,8 +89,8 @@
                             <img src="assets/images/hero.png" style="object-fit: cover;" alt="Mariscada Real">
                         </div>
                         <div class="card-content">
-                            <h3>Mariscada Real</h3>
-                            <p>Selección premium de bogavante, gambas rojas y ostras para compartir.</p>
+                            <h3 data-i18n="dish_mariscada">Mariscada Real</h3>
+                            <p data-i18n="dish_mariscada_desc">Selección premium de bogavante, gambas rojas y ostras para compartir.</p>
                             <span class="price">85€</span>
                         </div>
                     </div>
@@ -100,14 +99,14 @@
                             <img src="assets/images/dish.png" style="filter: hue-rotate(15deg);" alt="Tartar de Atún">
                         </div>
                         <div class="card-content">
-                            <h3>Tartar de Atún Rojo</h3>
-                            <p>Con aguacate, sésamo y un toque de cítricos locales.</p>
+                            <h3 data-i18n="dish_tartar">Tartar de Atún Rojo</h3>
+                            <p data-i18n="dish_tartar_desc">Con aguacate, sésamo y un toque de cítricos locales.</p>
                             <span class="price">24€</span>
                         </div>
                     </div>
                 </div>
                 <div class="text-center mt-4">
-                    <a href="carta.html" class="btn btn-secondary">Ver Menú Completo</a>
+                    <a href="carta.html" class="btn btn-secondary" data-i18n="btn_menu_completo">Ver Menú Completo</a>
                 </div>
             </div>
         </section>
@@ -115,46 +114,46 @@
         <section id="contacto" class="contact section">
             <div class="container contact-wrapper">
                 <div class="contact-info">
-                    <h2 class="section-title">Visítenos</h2>
-                    <p>Estamos ubicados en el centro histórico de Palma.</p>
+                    <h2 class="section-title" data-i18n="contact_title">Visítenos</h2>
+                    <p data-i18n="contact_intro">Estamos ubicados en el centro histórico de Palma.</p>
 
                     <div class="info-item">
-                        <h3>Dirección</h3>
+                        <h3 data-i18n="contact_direccion">Dirección</h3>
                         <p>Avinguda de l'Argentina, 59<br>07011 Palma, Illes Balears</p>
                     </div>
 
                     <div class="info-item">
-                        <h3>Horario</h3>
-                        <p>Lunes y Martes: 13:30 - 16:30<br>Miércoles a Sábado: 13:30 - 16:30 | 20:00 -
+                        <h3 data-i18n="contact_horario">Horario</h3>
+                        <p data-i18n="contact_horario_text">Lunes y Martes: 13:30 - 16:30<br>Miércoles a Sábado: 13:30 - 16:30 | 20:00 -
                             23:30<br>Domingo: Cerrado</p>
                     </div>
 
                     <div class="info-item">
-                        <h3>Contacto</h3>
+                        <h3 data-i18n="contact_contacto">Contacto</h3>
                         <p>Tel: +34 659 02 13 02<br>Tel: +34 971 28 83 60<br>Email: reservas@restauranteavoa.com</p>
                     </div>
                 </div>
                 <div class="contact-form-wrapper">
-                    <h3>Hacer una Reserva</h3>
+                    <h3 data-i18n="contact_form_title">Hacer una Reserva</h3>
                     <form class="contact-form">
                         <div class="form-group">
-                            <input type="text" placeholder="Nombre" required>
+                            <input type="text" data-i18n="form_nombre" placeholder="Nombre" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Email" required>
+                            <input type="email" data-i18n="form_email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" placeholder="Teléfono" required>
+                            <input type="tel" data-i18n="form_telefono" placeholder="Teléfono" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <input type="date" required>
                             </div>
                             <div class="form-group">
-                                <input type="number" placeholder="Personas" min="1" max="10" required>
+                                <input type="number" data-i18n="form_personas" placeholder="Personas" min="1" max="10" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary full-width">Confirmar Reserva</button>
+                        <button type="submit" class="btn btn-primary full-width" data-i18n="btn_confirmar">Confirmar Reserva</button>
                     </form>
                 </div>
             </div>
@@ -163,17 +162,25 @@
 
     <footer class="footer">
         <div class="container footer-content">
-            <div class="footer-logo" aria-label="Restaurante Avoa"><span class="inverted-v">V</span>VO<span
-                    class="inverted-v">V</span></div>
-            <div class="social-links">
-                <a href="#" aria-label="Instagram">IG</a>
-                <a href="#" aria-label="Facebook">FB</a>
-                <a href="#" aria-label="TripAdvisor">TA</a>
+            <div class="footer-logo" aria-label="Restaurante Avoa">ΛVOΛ</div>
+            
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="ca">CA</button>
+                <button class="lang-btn" data-lang="en">EN</button>
             </div>
-            <p class="copyright">&copy; 2024 Restaurante Avoa. Todos los derechos reservados.</p>
+            
+            <div class="social-links">
+                <a href="https://www.instagram.com/restauranteavoapalma/" aria-label="Instagram">IG</a>
+                <a href="https://www.facebook.com/AvoaPalmaRestaurante#" aria-label="Facebook">FB</a>
+                <a href="https://www.thefork.es/restaurante/restaurante-avoa-palma-r850719" aria-label="The fork">TF</a>
+            </div>
+            <p class="copyright" data-i18n="footer_copyright">&copy; 2024 Restaurante Avoa. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+    <script src="translations.js"></script>
     <script>
         // Simple mobile menu toggle
         const mobileBtn = document.querySelector('.mobile-menu-btn');
