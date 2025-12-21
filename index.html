@@ -41,8 +41,10 @@
                 <img src="assets/images/hero.png" alt="Mariscada fresca con vino blanco" loading="eager">
             </div>
             <div class="hero-content container">
-                <h1 class="hero-title"><span data-i18n="hero_title">La Esencia del</span> <span class="highlight" data-i18n="hero_highlight">Mediterráneo</span></h1>
-                <p class="hero-subtitle" data-i18n="hero_subtitle">Pescado y marisco fresco en el corazón de Palma de Mallorca.</p>
+                <h1 class="hero-title"><span data-i18n="hero_title">La Esencia del</span> <span class="highlight"
+                        data-i18n="hero_highlight">Mediterráneo</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Pescado y marisco fresco en el corazón de Palma de
+                    Mallorca.</p>
                 <div class="hero-actions">
                     <a href="#contacto" class="btn btn-primary" data-i18n="btn_reservar_mesa">Reservar Mesa</a>
                     <a href="carta.html" class="btn btn-outline" data-i18n="btn_ver_carta">Ver Carta</a>
@@ -57,10 +59,12 @@
                 </div>
                 <div class="about-text">
                     <h2 class="section-title" data-i18n="about_title">Nuestra Historia</h2>
-                    <p data-i18n="about_p1">En <strong>Restaurante Avoa</strong>, nos dedicamos a traer lo mejor del mar a su mesa. Situados
+                    <p data-i18n="about_p1">En <strong>Restaurante Avoa</strong>, nos dedicamos a traer lo mejor del mar
+                        a su mesa. Situados
                         en el vibrante centro de Palma, ofrecemos una experiencia culinaria que combina la tradición
                         marinera con un toque moderno y sofisticado.</p>
-                    <p data-i18n="about_p2">La excelencia es nuestra norma. Por ello, nuestro marisco viaja diariamente en avión desde las
+                    <p data-i18n="about_p2">La excelencia es nuestra norma. Por ello, nuestro marisco viaja diariamente
+                        en avión desde las
                         mejores lonjas de Galicia hasta su mesa en Palma, garantizando una frescura absoluta y el
                         auténtico sabor del Atlántico.</p>
                 </div>
@@ -70,7 +74,8 @@
         <section id="menu" class="menu-preview section bg-light">
             <div class="container">
                 <h2 class="section-title text-center" data-i18n="specialties_title">Nuestras Especialidades</h2>
-                <p class="section-subtitle text-center" data-i18n="specialties_subtitle">Sabores auténticos preparados con maestría</p>
+                <p class="section-subtitle text-center" data-i18n="specialties_subtitle">Sabores auténticos preparados
+                    con maestría</p>
 
                 <div class="menu-grid">
                     <div class="menu-card">
@@ -79,7 +84,8 @@
                         </div>
                         <div class="card-content">
                             <h3 data-i18n="dish_pulpo">Pulpo a Feira</h3>
-                            <p data-i18n="dish_pulpo_desc">Pulpo gallego cocido con pimentón, aceite de oliva y sal gruesa.</p>
+                            <p data-i18n="dish_pulpo_desc">Pulpo gallego cocido con pimentón, aceite de oliva y sal
+                                gruesa.</p>
                             <span class="price">28€</span>
                         </div>
                     </div>
@@ -124,7 +130,8 @@
 
                     <div class="info-item">
                         <h3 data-i18n="contact_horario">Horario</h3>
-                        <p data-i18n="contact_horario_text">Lunes y Martes: 13:30 - 16:30<br>Miércoles a Sábado: 13:30 - 16:30 | 20:00 -
+                        <p data-i18n="contact_horario_text">Lunes y Martes: 13:30 - 16:30<br>Miércoles a Sábado: 13:30 -
+                            16:30 | 20:00 -
                             23:30<br>Domingo: Cerrado</p>
                     </div>
 
@@ -150,10 +157,27 @@
                                 <input type="date" required>
                             </div>
                             <div class="form-group">
-                                <input type="number" data-i18n="form_personas" placeholder="Personas" min="1" max="10" required>
+                                <input type="number" data-i18n="form_personas" placeholder="Personas" min="1" max="10"
+                                    required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary full-width" data-i18n="btn_confirmar">Confirmar Reserva</button>
+                        <div class="form-group">
+                            <textarea data-i18n="form_comentarios" placeholder="Comentarios (opcional)" rows="3"
+                                style="resize: vertical;"></textarea>
+                        </div>
+                        <div class="form-group"
+                            style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <input type="checkbox" id="privacy-consent" required
+                                style="margin-top: 0.25rem; cursor: pointer; min-width: 18px; height: 18px;">
+                            <label for="privacy-consent"
+                                style="font-size: 0.85rem; color: #666; cursor: pointer; line-height: 1.5;">
+                                Acepto la <a href="privacidad.html" target="_blank"
+                                    style="color: var(--color-primary); text-decoration: underline;">política de
+                                    privacidad</a> y el tratamiento de mis datos personales para gestionar mi reserva. *
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width" data-i18n="btn_confirmar">Confirmar
+                            Reserva</button>
                     </form>
                 </div>
             </div>
@@ -163,22 +187,35 @@
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-logo" aria-label="Restaurante Avoa">ΛVOΛ</div>
-            
+
             <!-- Language Selector -->
             <div class="language-selector">
                 <button class="lang-btn active" data-lang="es">ES</button>
                 <button class="lang-btn" data-lang="ca">CA</button>
                 <button class="lang-btn" data-lang="en">EN</button>
             </div>
-            
+
             <div class="social-links">
                 <a href="https://www.instagram.com/restauranteavoapalma/" aria-label="Instagram">IG</a>
                 <a href="https://www.facebook.com/AvoaPalmaRestaurante#" aria-label="Facebook">FB</a>
                 <a href="https://www.thefork.es/restaurante/restaurante-avoa-palma-r850719" aria-label="The fork">TF</a>
             </div>
-            <p class="copyright" data-i18n="footer_copyright">&copy; 2024 Restaurante Avoa. Todos los derechos reservados.</p>
+            <p class="copyright" data-i18n="footer_copyright">&copy; 2024 Restaurante Avoa. Todos los derechos
+                reservados. | <a href="privacidad.html"
+                    style="color: var(--color-primary); text-decoration: none;">Política de Privacidad</a></p>
         </div>
     </footer>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- reCAPTCHA Configuration (Anti-bot Protection) -->
+    <script src="recaptcha-config.js"></script>
+
+    <!-- Supabase Configuration & Scripts -->
+    <script src="supabase-config.js"></script>
+    <script src="supabase-menu.js"></script>
+    <script src="supabase-reservations.js"></script>
 
     <script src="translations.js"></script>
     <script>

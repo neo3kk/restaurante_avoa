@@ -1,0 +1,25 @@
+# Supabase credentials (IMPORTANTE: No subir al repositorio)
+supabase-config.js
+
+# Node modules (si usas npm en el futuro)
+node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporal files
+*.tmp
+.cache/

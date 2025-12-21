@@ -42,6 +42,7 @@ const translations = {
         form_email: "Email",
         form_telefono: "Teléfono",
         form_personas: "Personas",
+        form_comentarios: "Comentarios (opcional)",
         btn_confirmar: "Confirmar Reserva",
 
         // Footer
@@ -144,6 +145,7 @@ const translations = {
         form_email: "Email",
         form_telefono: "Telèfon",
         form_personas: "Persones",
+        form_comentarios: "Comentaris (opcional)",
         btn_confirmar: "Confirmar Reserva",
 
         // Footer
@@ -246,6 +248,7 @@ const translations = {
         form_email: "Email",
         form_telefono: "Phone",
         form_personas: "Guests",
+        form_comentarios: "Comments (optional)",
         btn_confirmar: "Confirm Reservation",
 
         // Footer
