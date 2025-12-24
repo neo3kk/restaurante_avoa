@@ -4,460 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración - Restaurante Avoa</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <title>Redirigiendo... - Restaurante Avoa</title>
+    <script>
+        // Redirigir inmediatamente a login.html
+        window.location.replace('./login.html');
+    </script>
     <style>
-        :root {
-            --admin-bg: #f8f9fa;
-            --admin-sidebar: #0f172a;
-            --admin-card: #ffffff;
-            --admin-border: #e2e8f0;
-            --admin-text: #334155;
-            --admin-text-light: #64748b;
-            --admin-success: #10b981;
-            --admin-warning: #f59e0b;
-            --admin-danger: #ef4444;
-        }
-
         body {
             margin: 0;
-            background: var(--admin-bg);
-            font-family: var(--font-body);
-        }
-
-        .admin-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .admin-sidebar {
-            width: 260px;
-            background: var(--admin-sidebar);
-            color: white;
-            padding: 2rem 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .admin-logo {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--color-primary);
-            text-align: center;
-            margin-bottom: 3rem;
-            letter-spacing: 0.2em;
-        }
-
-        .admin-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .admin-nav-item {
-            margin: 0.5rem 1rem;
-        }
-
-        .admin-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.875rem 1rem;
-            color: #94a3b8;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.2s;
-            font-size: 0.95rem;
-        }
-
-        .admin-nav-link:hover,
-        .admin-nav-link.active {
-            background: rgba(197, 160, 89, 0.1);
-            color: var(--color-primary);
-        }
-
-        .admin-nav-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Main Content */
-        .admin-main {
-            flex: 1;
-            margin-left: 260px;
-            padding: 2rem;
-        }
-
-        .admin-header {
-            background: white;
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-header h1 {
-            margin: 0;
-            font-family: var(--font-heading);
-            color: var(--admin-text);
-            font-size: 1.75rem;
-        }
-
-        .admin-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .admin-user-info {
-            text-align: right;
-        }
-
-        .admin-user-name {
-            font-weight: 600;
-            color: var(--admin-text);
-            font-size: 0.9rem;
-        }
-
-        .admin-user-role {
-            font-size: 0.8rem;
-            color: var(--admin-text-light);
-        }
-
-        .btn-logout {
-            padding: 0.5rem 1rem;
-            background: var(--admin-danger);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-
-        .btn-logout:hover {
-            background: #dc2626;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .stat-title {
-            font-size: 0.875rem;
-            color: var(--admin-text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .stat-icon.primary {
-            background: rgba(197, 160, 89, 0.1);
-            color: var(--color-primary);
-        }
-
-        .stat-icon.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--admin-success);
-        }
-
-        .stat-icon.warning {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--admin-warning);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--admin-text);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--admin-text-light);
-        }
-
-        /* Content Cards */
-        .content-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .content-card h2 {
-            margin: 0 0 1.5rem 0;
-            font-family: var(--font-heading);
-            color: var(--admin-text);
-            font-size: 1.5rem;
-        }
-
-        /* Login Screen */
-        .login-container {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-
-        .login-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 420px;
-        }
-
-        .login-logo {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: var(--color-primary);
-            text-align: center;
-            margin-bottom: 1rem;
-            letter-spacing: 0.2em;
-        }
-
-        .login-title {
-            text-align: center;
-            color: var(--admin-text);
-            margin-bottom: 2rem;
-            font-size: 1.25rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--admin-text);
-            font-weight: 500;
-            font-size: 0.875rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--admin-border);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.2s;
-            box-sizing: border-box;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 0.875rem;
-            background: var(--color-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .btn-primary:hover {
-            background: var(--color-secondary);
+        .loader {
+            text-align: center;
         }
 
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #c5a059;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
 
-        .error-message {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.875rem;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .admin-sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s;
-            }
-
-            .admin-sidebar.mobile-open {
-                transform: translateX(0);
-            }
-
-            .admin-main {
-                margin-left: 0;
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Login Screen -->
-    <div id="loginScreen" class="login-container">
-        <div class="login-card">
-            <div class="login-logo">ΛVOΛ</div>
-            <h2 class="login-title">Panel de Administración</h2>
-
-            <div id="loginError" class="error-message hidden"></div>
-
-            <form id="loginForm">
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input type="email" id="email" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="password">Contraseña</label>
-                    <input type="password" id="password" class="form-input" required>
-                </div>
-                <button type="submit" class="btn-primary" id="loginBtn">Iniciar Sesión</button>
-            </form>
-        </div>
+    <div class="loader">
+        <div class="spinner"></div>
+        <p>Redirigiendo al panel de administración...</p>
     </div>
 
-    <!-- Admin Dashboard -->
-    <div id="adminDashboard" class="admin-container hidden">
-        <aside class="admin-sidebar">
-            <div class="admin-logo">ΛVOΛ</div>
-            <ul class="admin-nav">
-                <li class="admin-nav-item">
-                    <a href="index.html" class="admin-nav-link active">
-                        <span class="admin-nav-icon">📊</span>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="admin-nav-item">
-                    <a href="reservas.html" class="admin-nav-link">
-                        <span class="admin-nav-icon">📅</span>
-                        <span>Reservas</span>
-                    </a>
-                </li>
-                <li class="admin-nav-item">
-                    <a href="menu.html" class="admin-nav-link">
-                        <span class="admin-nav-icon">🍽️</span>
-                        <span>Menú</span>
-                    </a>
-                </li>
-                <li class="admin-nav-item">
-                    <a href="../index.html" class="admin-nav-link">
-                        <span class="admin-nav-icon">🌐</span>
-                        <span>Ver Sitio Web</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
-
-        <main class="admin-main">
-            <header class="admin-header">
-                <h1>Dashboard</h1>
-                <div class="admin-user">
-                    <div class="admin-user-info">
-                        <div class="admin-user-name" id="userName">Administrador</div>
-                        <div class="admin-user-role">Admin</div>
-                    </div>
-                    <button class="btn-logout" id="logoutBtn">Cerrar Sesión</button>
-                </div>
-            </header>
-
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-title">Reservas Hoy</span>
-                        <div class="stat-icon primary">📅</div>
-                    </div>
-                    <div class="stat-value" id="reservasHoy">0</div>
-                    <div class="stat-label">Pendientes de confirmar</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-title">Total Platos</span>
-                        <div class="stat-icon success">🍽️</div>
-                    </div>
-                    <div class="stat-value" id="totalPlatos">0</div>
-                    <div class="stat-label">En el menú activo</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-title">Reservas Mes</span>
-                        <div class="stat-icon warning">📊</div>
-                    </div>
-                    <div class="stat-value" id="reservasMes">0</div>
-                    <div class="stat-label">Este mes</div>
-                </div>
-            </div>
-
-            <!-- Recent Reservations -->
-            <div class="content-card">
-                <h2>Últimas Reservas</h2>
-                <div id="recentReservations">
-                    <p style="color: var(--admin-text-light);">Cargando...</p>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Supabase JS Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../supabase-config.js"></script>
-    <script src="admin-auth.js"></script>
-    <script src="admin-dashboard.js"></script>
+    <!-- Fallback si JavaScript está deshabilitado -->
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=./login.html">
+    </noscript>
 </body>
 
 </html>
