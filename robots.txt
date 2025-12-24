@@ -1,0 +1,18 @@
+# robots.txt - Restaurante Avoa
+# Este archivo indica a los bots de búsqueda qué pueden indexar
+
+# Permitir a todos los bots acceder a todo el contenido público
+User-agent: *
+Allow: /
+
+# Sitemap para facilitar la indexación
+Sitemap: https://restauranteavoa.com/sitemap.xml
+
+# Crawl delay (tiempo entre peticiones) - opcional
+# Crawl-delay: 1
+
+# Nota: NO bloqueamos directorios privados aquí por seguridad
+# La protección real debe hacerse con:
+# - Autenticación (login)
+# - Configuración del servidor (.htaccess o similar)
+# - Firewall

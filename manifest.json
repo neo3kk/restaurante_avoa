@@ -1,0 +1,37 @@
+{
+    "name": "Restaurante Avoa",
+    "short_name": "Avoa",
+    "description": "Restaurante de pescado y marisco fresco en Palma de Mallorca",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1a1a1a",
+    "theme_color": "#c49b63",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "16x16 32x32 48x48 64x64 128x128 256x256",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/favicon-source.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "food",
+        "restaurant"
+    ],
+    "lang": "es",
+    "dir": "ltr",
+    "scope": "/",
+    "screenshots": []
+}

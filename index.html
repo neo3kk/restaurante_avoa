@@ -4,15 +4,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- SEO Meta Tags -->
+    <title>Restaurante Avoa | Pescado y Marisco Fresco en Palma de Mallorca</title>
     <meta name="description"
-        content="Restaurante Avoa: El mejor pescado y marisco fresco en el centro de Palma de Mallorca. Una experiencia gastronómica mediterránea única.">
-    <title>Restaurante Avoa | Pescado y Marisco en Palma</title>
+        content="Restaurante Avoa en Palma de Mallorca: pescado fresco y marisco de calidad. Cocina mediterránea con productos del mar. Reserva tu mesa en el mejor restaurante de pescado de Mallorca.">
+    <meta name="keywords"
+        content="restaurante pescado Mallorca, marisco Palma, pescado fresco Mallorca, restaurante marisco Palma de Mallorca, cocina mediterránea, pescado fresco, marisco fresco, restaurante Palma centro">
+    <meta name="author" content="Restaurante Avoa">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://restauranteavoa.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="restaurant">
+    <meta property="og:url" content="https://restauranteavoa.com/">
+    <meta property="og:title" content="Restaurante Avoa | Pescado y Marisco Fresco en Palma de Mallorca">
+    <meta property="og:description"
+        content="El mejor pescado y marisco fresco en Palma de Mallorca. Cocina mediterránea de calidad en el centro de Palma.">
+    <meta property="og:image" content="https://restauranteavoa.com/assets/og-image.jpg">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:locale:alternate" content="ca_ES">
+    <meta property="og:locale:alternate" content="en_GB">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://restauranteavoa.com/">
+    <meta name="twitter:title" content="Restaurante Avoa | Pescado y Marisco Fresco en Palma">
+    <meta name="twitter:description"
+        content="El mejor pescado y marisco fresco en Palma de Mallorca. Reserva tu mesa ahora.">
+    <meta name="twitter:image" content="https://restauranteavoa.com/assets/og-image.jpg">
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="ES-PM">
+    <meta name="geo.placename" content="Palma de Mallorca">
+    <meta name="geo.position" content="39.5696;2.6502">
+    <meta name="ICBM" content="39.5696, 2.6502">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
         rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon-source.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c49b63">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Restaurante Avoa",
+      "image": "https://restauranteavoa.com/assets/og-image.jpg",
+      "description": "Restaurante de pescado y marisco fresco en Palma de Mallorca. Cocina mediterránea de calidad con productos del mar.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avinguda de l'Argentina, 59",
+        "addressLocality": "Palma",
+        "addressRegion": "Illes Balears",
+        "postalCode": "07011",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.5696,
+        "longitude": 2.6502
+      },
+      "url": "https://restauranteavoa.com",
+      "telephone": "+34659021302",
+      "servesCuisine": ["Mediterránea", "Pescado", "Marisco"],
+      "priceRange": "$$",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday"],
+          "opens": "13:30",
+          "closes": "16:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "13:30",
+          "closes": "16:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "20:00",
+          "closes": "23:30"
+        }
+      ],
+      "menu": "https://restauranteavoa.com/carta.html",
+      "acceptsReservations": "True"
+    }
+    </script>
 </head>
 
 <body>
@@ -38,7 +138,7 @@
     <main>
         <section id="inicio" class="hero">
             <div class="hero-bg">
-                <img src="assets/images/hero.png" alt="Mariscada fresca con vino blanco" loading="eager">
+                <img src="assets/images/hero_1024.png" alt="Mariscada fresca con vino blanco" loading="eager">
             </div>
             <div class="hero-content container">
                 <h1 class="hero-title"><span data-i18n="hero_title">La Esencia del</span> <span class="highlight"
@@ -55,7 +155,7 @@
         <section id="nosotros" class="about section">
             <div class="container about-grid">
                 <div class="about-image">
-                    <img src="assets/images/interior.png" alt="Interior del Restaurante Avoa">
+                    <img src="assets/images/interior_512.png" alt="Interior del Restaurante Avoa">
                 </div>
                 <div class="about-text">
                     <h2 class="section-title" data-i18n="about_title">Nuestra Historia</h2>
@@ -142,24 +242,27 @@
                 </div>
                 <div class="contact-form-wrapper">
                     <h3 data-i18n="contact_form_title">Hacer una Reserva</h3>
-                    <form class="contact-form">
+                    <form class="contact-form" id="reservation-form">
                         <div class="form-group">
-                            <input type="text" data-i18n="form_nombre" placeholder="Nombre" required>
+                            <input type="text" id="nombre" data-i18n="form_nombre" placeholder="Nombre" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" data-i18n="form_email" placeholder="Email" required>
+                            <input type="email" id="email" data-i18n="form_email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" data-i18n="form_telefono" placeholder="Teléfono" required>
+                            <input type="tel" id="telefono" data-i18n="form_telefono" placeholder="Teléfono" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="date" required>
+                                <input type="date" id="fecha" required>
                             </div>
                             <div class="form-group">
-                                <input type="number" data-i18n="form_personas" placeholder="Personas" min="1" max="10"
-                                    required>
+                                <input type="time" id="hora" required>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="personas" data-i18n="form_personas" placeholder="Personas" min="1"
+                                max="10" required>
                         </div>
                         <div class="form-group">
                             <textarea data-i18n="form_comentarios" placeholder="Comentarios (opcional)" rows="3"
@@ -215,6 +318,7 @@
     <!-- Supabase Configuration & Scripts -->
     <script src="supabase-config.js"></script>
     <script src="supabase-menu.js"></script>
+    <script src="js/horarios-reserva.js"></script>
     <script src="supabase-reservations.js"></script>
 
     <script src="translations.js"></script>

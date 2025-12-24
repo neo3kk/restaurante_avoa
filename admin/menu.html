@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Menú - Restaurante Avoa Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="admin-page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ΛVOΛ</div>
+            <p class="logo-subtitle">Admin Panel</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/admin/dashboard.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="/admin/reservas.html" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">Reservas</span>
+            </a>
+            <a href="/admin/menu.html" class="nav-item active">
+                <span class="nav-icon">🍽️</span>
+                <span class="nav-text">Menú</span>
+            </a>
+            <a href="/admin/configuracion.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Configuración</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-details">
+                    <p class="user-name" id="admin-name">Admin</p>
+                    <p class="user-email" id="admin-email">Loading...</p>
+                </div>
+            </div>
+            <button class="btn-logout" id="logout-btn">
+                <span>🚪</span> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="content-header">
+            <div>
+                <h1>Gestión de Menú</h1>
+                <p class="subtitle">Administra los platos y categorías del menú</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="refresh-btn">
+                    <span>🔄</span> Actualizar
+                </button>
+                <button class="btn btn-primary" id="nuevo-plato-btn">
+                    <span>➕</span> Nuevo Plato
+                </button>
+            </div>
+        </header>
+
+        <!-- Filtros -->
+        <section class="filters-section">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="filter-categoria">Categoría</label>
+                    <select id="filter-categoria" class="filter-input">
+                        <option value="">Todas</option>
+                        <option value="entrantes">Entrantes</option>
+                        <option value="pescados">Pescados</option>
+                        <option value="mariscos">Mariscos</option>
+                        <option value="arroces">Arroces</option>
+                        <option value="carnes">Carnes</option>
+                        <option value="postres">Postres</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filter-disponible">Disponibilidad</label>
+                    <select id="filter-disponible" class="filter-input">
+                        <option value="">Todos</option>
+                        <option value="true">Disponibles</option>
+                        <option value="false">No disponibles</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filter-buscar">Buscar</label>
+                    <input type="text" id="filter-buscar" class="filter-input" placeholder="Nombre del plato...">
+                </div>
+                <div class="filter-group">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-outline" id="limpiar-filtros-btn">Limpiar Filtros</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabla de Platos -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Todos los Platos</h2>
+                <span class="badge badge-info" id="total-platos">0 platos</span>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="platos-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Descripción</th>
+                            <th>Disponible</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="platos-body">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                <div class="empty-icon">🍽️</div>
+                                <p>Cargando platos...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination" id="pagination">
+                <button class="btn btn-sm btn-outline" id="prev-page" disabled>← Anterior</button>
+                <span id="page-info">Página 1 de 1</span>
+                <button class="btn btn-sm btn-outline" id="next-page" disabled>Siguiente →</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Nuevo/Editar Plato -->
+    <div id="plato-modal" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modal-title">Nuevo Plato</h3>
+                <button class="modal-close" onclick="cerrarModalPlato()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="plato-form">
+                    <input type="hidden" id="plato-id">
+
+                    <h4 style="margin-bottom: 1rem; color: var(--color-primary);">Nombres</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="plato-nombre-es">Español *</label>
+                            <input type="text" id="plato-nombre-es" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="plato-nombre-ca">Catalán</label>
+                            <input type="text" id="plato-nombre-ca">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="plato-nombre-en">Inglés</label>
+                            <input type="text" id="plato-nombre-en">
+                        </div>
+                    </div>
+
+                    <h4 style="margin: 1.5rem 0 1rem; color: var(--color-primary);">Detalles</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="plato-categoria">Categoría *</label>
+                            <select id="plato-categoria" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="entrantes">Entrantes</option>
+                                <option value="pescados">Pescados</option>
+                                <option value="mariscos">Mariscos</option>
+                                <option value="arroces">Arroces</option>
+                                <option value="carnes">Carnes</option>
+                                <option value="postres">Postres</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="plato-precio">Precio (€) *</label>
+                            <input type="number" id="plato-precio" min="0" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <h4 style="margin: 1.5rem 0 1rem; color: var(--color-primary);">Descripciones</h4>
+                    <div class="form-group">
+                        <label for="plato-descripcion-es">Español</label>
+                        <textarea id="plato-descripcion-es" rows="2" placeholder="Descripción del plato..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plato-descripcion-ca">Catalán</label>
+                        <textarea id="plato-descripcion-ca" rows="2" placeholder="Descripció del plat..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plato-descripcion-en">Inglés</label>
+                        <textarea id="plato-descripcion-en" rows="2" placeholder="Dish description..."></textarea>
+                    </div>
+
+                    <div class="form-row" style="margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="plato-disponible" checked>
+                                Disponible para servir
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="cerrarModalPlato()">Cancelar</button>
+                <button class="btn btn-primary" id="guardar-plato-btn">Guardar Plato</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmación -->
+    <div id="confirm-modal" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Acción</h3>
+                <button class="modal-close" onclick="cerrarModalConfirm()">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">¿Estás seguro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="cerrarModalConfirm()">Cancelar</button>
+                <button class="btn btn-primary" id="confirm-action-btn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Scripts -->
+    <script src="../supabase-config.js"></script>
+    <script src="../js/supabase-alias.js"></script>
+    <script src="../js/admin-auth.js"></script>
+    <script src="../js/admin-menu.js"></script>
+
+</body>
+
+</html>

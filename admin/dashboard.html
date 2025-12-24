@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Restaurante Avoa Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="admin-page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ΛVOΛ</div>
+            <p class="logo-subtitle">Admin Panel</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/admin/dashboard.html" class="nav-item active">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="/admin/reservas.html" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">Reservas</span>
+            </a>
+            <a href="/admin/menu.html" class="nav-item">
+                <span class="nav-icon">🍽️</span>
+                <span class="nav-text">Menú</span>
+            </a>
+            <a href="/admin/configuracion.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Configuración</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-details">
+                    <p class="user-name" id="admin-name">Admin</p>
+                    <p class="user-email" id="admin-email">Loading...</p>
+                </div>
+            </div>
+            <button class="btn-logout" id="logout-btn">
+                <span>🚪</span> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="content-header">
+            <div>
+                <h1>Dashboard</h1>
+                <p class="subtitle">Resumen general del restaurante</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="refresh-btn">
+                    <span>🔄</span> Actualizar
+                </button>
+                <a href="../index.html" class="btn btn-outline" target="_blank">
+                    <span>🌐</span> Ver Sitio Web
+                </a>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">📅</div>
+                <div class="stat-content">
+                    <p class="stat-label">Reservas Hoy</p>
+                    <p class="stat-value" id="stat-reservas-hoy">-</p>
+                    <p class="stat-change positive" id="stat-personas-hoy">- personas</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">⏳</div>
+                <div class="stat-content">
+                    <p class="stat-label">Pendientes</p>
+                    <p class="stat-value" id="stat-pendientes">-</p>
+                    <p class="stat-change">Por confirmar</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">✅</div>
+                <div class="stat-content">
+                    <p class="stat-label">Confirmadas</p>
+                    <p class="stat-value" id="stat-confirmadas">-</p>
+                    <p class="stat-change">Próximas reservas</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(196, 155, 99, 0.1); color: #c49b63;">📧</div>
+                <div class="stat-content">
+                    <p class="stat-label">Emails Hoy</p>
+                    <p class="stat-value" id="stat-emails">-</p>
+                    <p class="stat-change">Enviados</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acciones Rápidas -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Acciones Rápidas</h2>
+            </div>
+            <div class="quick-actions-grid">
+                <button class="action-card" id="download-menu-pdf">
+                    <div class="action-icon">📄</div>
+                    <div class="action-content">
+                        <h3>Descargar Carta PDF</h3>
+                        <p>Genera un PDF de la carta actual</p>
+                    </div>
+                </button>
+                <a href="/admin/menu.html" class="action-card">
+                    <div class="action-icon">🍽️</div>
+                    <div class="action-content">
+                        <h3>Gestionar Menú</h3>
+                        <p>Editar platos y categorías</p>
+                    </div>
+                </a>
+                <a href="/admin/reservas.html" class="action-card">
+                    <div class="action-icon">📅</div>
+                    <div class="action-content">
+                        <h3>Nueva Reserva</h3>
+                        <p>Crear reserva manualmente</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Reservas de Hoy -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Reservas de Hoy</h2>
+                <a href="/admin/reservas.html" class="btn btn-sm btn-outline">Ver Todas →</a>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="reservas-hoy-table">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Nombre</th>
+                            <th>Personas</th>
+                            <th>Teléfono</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservas-hoy-body">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                <div class="empty-icon">📅</div>
+                                <p>Cargando reservas...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Reservas Pendientes -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Reservas Pendientes de Confirmación</h2>
+                <span class="badge badge-warning" id="pendientes-count">0</span>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="reservas-pendientes-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Personas</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservas-pendientes-body">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                <div class="empty-icon">✅</div>
+                                <p>Cargando reservas pendientes...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirm-modal" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Acción</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">¿Estás seguro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" id="confirm-action-btn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- html2canvas y jsPDF para generar PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="../supabase-config.js"></script>
+    <script src="../js/supabase-alias.js"></script>
+    <script src="../js/admin-auth.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+
+</body>
+
+</html>

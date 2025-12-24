@@ -1,154 +1,269 @@
 /**
- * SUPABASE MENU HANDLER
- * Gestiona la carga dinámica del menú desde Supabase
+ * CARGA DINÁMICA DEL MENÚ DESDE SUPABASE
+ * Restaurante Avoa
  */
 
-// Obtener el idioma actual
-function getCurrentLanguage() {
-    return localStorage.getItem('language') || 'es';
-}
+// Esperar a que Supabase esté disponible
+document.addEventListener('DOMContentLoaded', async () => {
+    // Esperar a que supabase esté inicializado
+    let intentos = 0;
+    const maxIntentos = 20;
 
-// Cargar items del menú por categoría
-async function loadMenuItems(categoria) {
+    while (typeof window.supabaseClient === 'undefined' && intentos < maxIntentos) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        intentos++;
+    }
+
+    if (typeof window.supabaseClient === 'undefined') {
+        console.error('❌ Supabase no está disponible después de esperar');
+        return;
+    }
+
+    console.log('✅ Supabase disponible, cargando menú...');
+    await cargarMenuDinamico();
+});
+
+async function cargarMenuDinamico() {
     try {
-        const { data, error } = await window.supabaseClient
+        // Cargar todos los platos disponibles desde Supabase
+        const { data: platos, error } = await window.supabaseClient
             .from('menu_items')
             .select('*')
-            .eq('categoria', categoria)
-            .eq('activo', true)
+            .eq('disponible', true)
+            .order('categoria', { ascending: true })
             .order('orden', { ascending: true });
 
-        if (error) throw error;
-        return data;
+        if (error) {
+            console.error('Error cargando menú:', error);
+            return;
+        }
+
+        if (!platos || platos.length === 0) {
+            console.warn('No hay platos disponibles en la base de datos');
+            return;
+        }
+
+        // Agrupar platos por categoría
+        const platosPorCategoria = {
+            entrantes: [],
+            pescados: [],
+            mariscos: [],
+            carnes: [],
+            postres: []
+        };
+
+        platos.forEach(plato => {
+            if (platosPorCategoria[plato.categoria]) {
+                platosPorCategoria[plato.categoria].push(plato);
+            }
+        });
+
+        // Renderizar cada categoría
+        renderizarEntrantes(platosPorCategoria.entrantes);
+        renderizarPescados(platosPorCategoria.pescados);
+        renderizarMariscos(platosPorCategoria.mariscos);
+        renderizarCarnes(platosPorCategoria.carnes);
+        renderizarPostres(platosPorCategoria.postres);
+
+        console.log('Menú cargado correctamente desde Supabase');
     } catch (error) {
-        console.error('Error cargando items del menú:', error);
-        return [];
+        console.error('Error al cargar el menú:', error);
     }
 }
 
-// Cargar items destacados para la página principal
-async function loadFeaturedItems() {
-    try {
-        const { data, error } = await window.supabaseClient
-            .from('menu_items')
-            .select('*')
-            .eq('activo', true)
-            .eq('destacado', true)
-            .order('orden', { ascending: true })
-            .limit(3);
+// Renderizar Entrantes
+function renderizarEntrantes(platos) {
+    const container = document.querySelector('.menu-section .menu-list');
+    if (!container) return;
 
-        if (error) throw error;
-        return data;
-    } catch (error) {
-        console.error('Error cargando items destacados:', error);
-        return [];
-    }
+    container.innerHTML = platos.map(plato => {
+        const precio = plato.precio ? `${plato.precio.toFixed(2)}€` : '<span style="font-size: 0.9rem; font-weight: 400; font-style: italic; color: #888;" data-i18n="precio_mercado">Precio según mercado</span>';
+
+        return `
+            <li class="menu-item">
+                ${plato.descripcion_es ? `
+                    <div style="display: flex; flex-direction: column;">
+                        <span class="menu-item-name" data-nombre-es="${plato.nombre_es}" data-nombre-ca="${plato.nombre_ca || ''}" data-nombre-en="${plato.nombre_en || ''}">${plato.nombre_es}</span>
+                        <span class="menu-item-desc" data-desc-es="${plato.descripcion_es || ''}" data-desc-ca="${plato.descripcion_ca || ''}" data-desc-en="${plato.descripcion_en || ''}">${plato.descripcion_es || ''}</span>
+                    </div>
+                ` : `
+                    <span class="menu-item-name" data-nombre-es="${plato.nombre_es}" data-nombre-ca="${plato.nombre_ca || ''}" data-nombre-en="${plato.nombre_en || ''}">${plato.nombre_es}</span>
+                `}
+                <span class="price-line"></span>
+                <span class="menu-item-price">${precio}</span>
+            </li>
+        `;
+    }).join('');
+
+    // Aplicar traducciones si hay un idioma seleccionado
+    aplicarTraduccionesMenu();
 }
 
-// Renderizar item del menú
-function renderMenuItem(item, lang = 'es') {
-    const nombre = item[`nombre_${lang}`] || item.nombre_es;
-    const descripcion = item[`descripcion_${lang}`] || item.descripcion_es || '';
+// Renderizar Pescados
+function renderizarPescados(platos) {
+    const container = document.querySelector('.fish-grid');
+    if (!container) return;
 
-    let precioHTML = '';
-    if (item.precio) {
-        precioHTML = `<span class="menu-item-price">${item.precio}€${item.unidad ? ` <span class="unit-price">${item.unidad}</span>` : ''}</span>`;
-    } else if (item.precio_texto) {
-        precioHTML = `<span class="menu-item-price" style="font-size: 0.9rem; font-weight: 400; font-style: italic; color: #888;">${item.precio_texto}</span>`;
+    // Mantener la nota inicial
+    const nota = container.querySelector('.fish-note');
+
+    container.innerHTML = '';
+    if (nota) {
+        container.appendChild(nota);
     }
 
-    return `
-        <li class="menu-item">
-            ${descripcion ? `
-                <div style="display: flex; flex-direction: column;">
-                    <span class="menu-item-name">${nombre}</span>
-                    <span class="menu-item-desc">${descripcion}</span>
-                </div>
-            ` : `
-                <span class="menu-item-name">${nombre}</span>
-            `}
-            ${precioHTML ? `<span class="price-line"></span>${precioHTML}` : ''}
+    platos.forEach(plato => {
+        const fishItem = document.createElement('span');
+        fishItem.className = 'fish-item';
+        fishItem.setAttribute('data-nombre-es', plato.nombre_es);
+        fishItem.setAttribute('data-nombre-ca', plato.nombre_ca || '');
+        fishItem.setAttribute('data-nombre-en', plato.nombre_en || '');
+        fishItem.textContent = plato.nombre_es;
+        container.appendChild(fishItem);
+    });
+
+    aplicarTraduccionesMenu();
+}
+
+// Renderizar Mariscos (se añaden a pescados)
+function renderizarMariscos(platos) {
+    const container = document.querySelector('.fish-grid');
+    if (!container) return;
+
+    platos.forEach(plato => {
+        const fishItem = document.createElement('span');
+        fishItem.className = 'fish-item';
+        fishItem.setAttribute('data-nombre-es', plato.nombre_es);
+        fishItem.setAttribute('data-nombre-ca', plato.nombre_ca || '');
+        fishItem.setAttribute('data-nombre-en', plato.nombre_en || '');
+        fishItem.textContent = plato.nombre_es;
+
+        // El último elemento ocupa toda la fila
+        if (plato.nombre_es.toLowerCase().includes('bogavante') || plato.nombre_es.toLowerCase().includes('llagosta')) {
+            fishItem.style.gridColumn = '1 / -1';
+        }
+
+        container.appendChild(fishItem);
+    });
+
+    aplicarTraduccionesMenu();
+}
+
+// Renderizar Carnes
+function renderizarCarnes(platos) {
+    const sections = document.querySelectorAll('.menu-section');
+    let carnesSection = null;
+
+    sections.forEach(section => {
+        const header = section.querySelector('h2[data-i18n="carta_carnes"]');
+        if (header) {
+            carnesSection = section;
+        }
+    });
+
+    if (!carnesSection) return;
+
+    const container = carnesSection.querySelector('.menu-list');
+    if (!container) return;
+
+    container.innerHTML = platos.map(plato => {
+        const precio = plato.precio ? `${plato.precio.toFixed(2)}€` : '<span style="font-size: 0.9rem; font-weight: 400; font-style: italic; color: #888;">PSM</span>';
+
+        return `
+            <li class="menu-item">
+                <span class="menu-item-name" data-nombre-es="${plato.nombre_es}" data-nombre-ca="${plato.nombre_ca || ''}" data-nombre-en="${plato.nombre_en || ''}">${plato.nombre_es}</span>
+                <span class="price-line"></span>
+                <span class="menu-item-price">${precio}</span>
+            </li>
+        `;
+    }).join('');
+
+    aplicarTraduccionesMenu();
+}
+
+// Renderizar Postres
+function renderizarPostres(platos) {
+    const sections = document.querySelectorAll('.menu-section');
+    let postresSection = null;
+
+    sections.forEach(section => {
+        const header = section.querySelector('h2[data-i18n="carta_postres"]');
+        if (header) {
+            postresSection = section;
+        }
+    });
+
+    if (!postresSection) return;
+
+    const container = postresSection.querySelector('.menu-list');
+    if (!container) return;
+
+    // Obtener el precio (todos los postres tienen el mismo precio)
+    const precioPostre = platos.length > 0 && platos[0].precio ? `${platos[0].precio.toFixed(2)}€` : '8€';
+
+    container.innerHTML = platos.map(plato => {
+        return `
+            <li class="menu-item">
+                <span class="menu-item-name" data-nombre-es="${plato.nombre_es}" data-nombre-ca="${plato.nombre_ca || ''}" data-nombre-en="${plato.nombre_en || ''}">${plato.nombre_es}</span>
+            </li>
+        `;
+    }).join('');
+
+    // Añadir el precio al final
+    container.innerHTML += `
+        <li class="menu-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+            <span class="price-line"></span>
+            <span class="menu-item-price">${precioPostre}</span>
         </li>
     `;
+
+    aplicarTraduccionesMenu();
 }
 
-// Renderizar tarjeta de plato destacado (para index.html)
-function renderFeaturedCard(item, lang = 'es') {
-    const nombre = item[`nombre_${lang}`] || item.nombre_es;
-    const descripcion = item[`descripcion_${lang}`] || item.descripcion_es || '';
+// Aplicar traducciones al menú dinámico
+function aplicarTraduccionesMenu() {
+    const lang = localStorage.getItem('preferredLanguage') || 'es';
 
-    let precioHTML = '';
-    if (item.precio) {
-        precioHTML = `<span class="price">${item.precio}€</span>`;
-    } else if (item.precio_texto) {
-        precioHTML = `<span class="price" style="font-size: 0.9rem; font-style: italic;">${item.precio_texto}</span>`;
-    }
+    // Traducir nombres de platos
+    document.querySelectorAll('[data-nombre-es]').forEach(element => {
+        const nombreEs = element.getAttribute('data-nombre-es');
+        const nombreCa = element.getAttribute('data-nombre-ca');
+        const nombreEn = element.getAttribute('data-nombre-en');
 
-    // Imagen por defecto si no hay imagen_url
-    const imageSrc = item.imagen_url || `assets/images/${item.categoria}.png`;
-
-    return `
-        <div class="menu-card">
-            <div class="card-image">
-                <img src="${imageSrc}" alt="${nombre}" onerror="this.src='https://placehold.co/400x300/d4af37/0f172a?text=${encodeURIComponent(nombre)}'">
-            </div>
-            <div class="card-content">
-                <h3>${nombre}</h3>
-                ${descripcion ? `<p>${descripcion}</p>` : ''}
-                ${precioHTML}
-            </div>
-        </div>
-    `;
-}
-
-// Cargar menú completo en carta.html
-async function loadFullMenu() {
-    const lang = getCurrentLanguage();
-
-    const categorias = [
-        { id: 'entrantes', selector: '#entrantes-list' },
-        { id: 'platos_calientes', selector: '#platos-calientes-list' },
-        { id: 'pescados', selector: '#pescados-list' },
-        { id: 'carnes', selector: '#carnes-list' },
-        { id: 'postres', selector: '#postres-list' }
-    ];
-
-    for (const categoria of categorias) {
-        const items = await loadMenuItems(categoria.id);
-        const container = document.querySelector(categoria.selector);
-
-        if (container && items.length > 0) {
-            container.innerHTML = items.map(item => renderMenuItem(item, lang)).join('');
+        if (lang === 'ca' && nombreCa) {
+            element.textContent = nombreCa;
+        } else if (lang === 'en' && nombreEn) {
+            element.textContent = nombreEn;
+        } else {
+            element.textContent = nombreEs;
         }
-    }
+    });
+
+    // Traducir descripciones
+    document.querySelectorAll('[data-desc-es]').forEach(element => {
+        const descEs = element.getAttribute('data-desc-es');
+        const descCa = element.getAttribute('data-desc-ca');
+        const descEn = element.getAttribute('data-desc-en');
+
+        if (lang === 'ca' && descCa) {
+            element.textContent = descCa;
+        } else if (lang === 'en' && descEn) {
+            element.textContent = descEn;
+        } else {
+            element.textContent = descEs;
+        }
+    });
 }
 
-// Cargar platos destacados en index.html
-async function loadFeaturedMenu() {
-    const lang = getCurrentLanguage();
-    const items = await loadFeaturedItems();
-    const container = document.querySelector('.menu-grid');
+// Escuchar cambios de idioma
+document.addEventListener('DOMContentLoaded', () => {
+    // Sobrescribir la función changeLanguage original para incluir traducciones del menú
+    const originalChangeLanguage = window.changeLanguage;
 
-    if (container && items.length > 0) {
-        container.innerHTML = items.map(item => renderFeaturedCard(item, lang)).join('');
-    }
-}
-
-// Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeMenu);
-} else {
-    initializeMenu();
-}
-
-function initializeMenu() {
-    // Detectar qué página estamos
-    const isCartaPage = window.location.pathname.includes('carta.html');
-    const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/';
-
-    if (isCartaPage) {
-        loadFullMenu();
-    } else if (isIndexPage) {
-        loadFeaturedMenu();
-    }
-}
+    window.changeLanguage = function (lang) {
+        if (originalChangeLanguage) {
+            originalChangeLanguage(lang);
+        }
+        aplicarTraduccionesMenu();
+    };
+});

@@ -41,9 +41,18 @@ const translations = {
         form_nombre: "Nombre",
         form_email: "Email",
         form_telefono: "Teléfono",
+        form_fecha: "Fecha",
+        form_hora: "Hora",
         form_personas: "Personas",
         form_comentarios: "Comentarios (opcional)",
         btn_confirmar: "Confirmar Reserva",
+
+        // Mensajes de validación de horarios
+        cerrado_domingos: "Cerrado los domingos",
+        selecciona_hora: "Selecciona una hora",
+        horario_lunes_martes: "Lunes y martes abrimos de 13:30 a 16:30.",
+        horario_miercoles_sabado: "Miércoles a sábado abrimos de 13:30 a 16:30 y de 20:00 a 23:30.",
+        fecha_invalida: "Por favor, selecciona una fecha válida.",
 
         // Footer
         footer_copyright: "© 2024 Restaurante Avoa. Todos los derechos reservados.",
@@ -144,9 +153,18 @@ const translations = {
         form_nombre: "Nom",
         form_email: "Email",
         form_telefono: "Telèfon",
+        form_fecha: "Data",
+        form_hora: "Hora",
         form_personas: "Persones",
         form_comentarios: "Comentaris (opcional)",
         btn_confirmar: "Confirmar Reserva",
+
+        // Missatges de validació d'horaris
+        cerrado_domingos: "Tancat els diumenges",
+        selecciona_hora: "Selecciona una hora",
+        horario_lunes_martes: "Dilluns i dimarts obrim de 13:30 a 16:30.",
+        horario_miercoles_sabado: "Dimecres a dissabte obrim de 13:30 a 16:30 i de 20:00 a 23:30.",
+        fecha_invalida: "Si us plau, selecciona una data vàlida.",
 
         // Footer
         footer_copyright: "© 2024 Restaurant Avoa. Tots els drets reservats.",
@@ -247,9 +265,18 @@ const translations = {
         form_nombre: "Name",
         form_email: "Email",
         form_telefono: "Phone",
+        form_fecha: "Date",
+        form_hora: "Time",
         form_personas: "Guests",
         form_comentarios: "Comments (optional)",
         btn_confirmar: "Confirm Reservation",
+
+        // Schedule validation messages
+        cerrado_domingos: "Closed on Sundays",
+        selecciona_hora: "Select a time",
+        horario_lunes_martes: "Monday and Tuesday we open from 1:30 PM to 4:30 PM.",
+        horario_miercoles_sabado: "Wednesday to Saturday we open from 1:30 PM to 4:30 PM and from 8:00 PM to 11:30 PM.",
+        fecha_invalida: "Please select a valid date.",
 
         // Footer
         footer_copyright: "© 2024 Restaurant Avoa. All rights reserved.",

@@ -1,0 +1,66 @@
+# .htaccess - Protección del Panel de Administración
+# Coloca este archivo en /admin/
+
+# ============================================
+# AUTENTICACIÓN BÁSICA (Opcional - Doble Capa)
+# ============================================
+
+# Descomentar para añadir autenticación HTTP básica
+# AuthType Basic
+# AuthName "Área de Administración - Restaurante Avoa"
+# AuthUserFile /ruta/completa/a/.htpasswd
+# Require valid-user
+
+# ============================================
+# RESTRICCIÓN POR IP (Recomendado)
+# ============================================
+
+# Permitir solo IPs específicas (descomentar y ajustar)
+# Order Deny,Allow
+# Deny from all
+# Allow from 123.456.789.0  # Tu IP de oficina
+# Allow from 98.765.432.0   # Tu IP de casa
+
+# ============================================
+# SEGURIDAD ADICIONAL
+# ============================================
+
+# Prevenir acceso a archivos sensibles
+<FilesMatch "\.(env|json|config|bak|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Headers de seguridad específicos para admin
+<IfModule mod_headers.c>
+    # Prevenir que se cargue en iframe (anti-clickjacking)
+    Header always set X-Frame-Options "DENY"
+    
+    # Política de seguridad de contenido más estricta
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.supabase.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co;"
+    
+    # Forzar HTTPS
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ============================================
+# RATE LIMITING (Prevenir fuerza bruta)
+# ============================================
+
+# Limitar número de peticiones (requiere mod_evasive o mod_qos)
+# <IfModule mod_evasive20.c>
+#     DOSHashTableSize 3097
+#     DOSPageCount 5
+#     DOSSiteCount 50
+#     DOSPageInterval 1
+#     DOSSiteInterval 1
+#     DOSBlockingPeriod 10
+# </IfModule>
+
+# ============================================
+# LOGGING
+# ============================================
+
+# Log de accesos al admin (opcional)
+# CustomLog /var/log/apache2/admin_access.log combined
+# ErrorLog /var/log/apache2/admin_error.log

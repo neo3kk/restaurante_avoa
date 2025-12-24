@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Restaurante Avoa Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="admin-page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ΛVOΛ</div>
+            <p class="logo-subtitle">Admin Panel</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/admin/dashboard.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="/admin/reservas.html" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">Reservas</span>
+            </a>
+            <a href="/admin/menu.html" class="nav-item">
+                <span class="nav-icon">🍽️</span>
+                <span class="nav-text">Menú</span>
+            </a>
+            <a href="/admin/configuracion.html" class="nav-item active">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Configuración</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-details">
+                    <p class="user-name" id="admin-name">Admin</p>
+                    <p class="user-email" id="admin-email">Loading...</p>
+                </div>
+            </div>
+            <button class="btn-logout" id="logout-btn">
+                <span>🚪</span> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="content-header">
+            <div>
+                <h1>Configuración</h1>
+                <p class="subtitle">Gestiona la configuración del restaurante y del panel</p>
+            </div>
+        </header>
+
+        <!-- Información del Restaurante -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Información del Restaurante</h2>
+            </div>
+            <div class="config-card">
+                <form id="info-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre-restaurante">Nombre del Restaurante</label>
+                            <input type="text" id="nombre-restaurante" value="Restaurante Avoa" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" value="+34 659 02 13 02 / +34 971 28 83 60" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="reservas@restauranteavoa.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" id="direccion" value="Avinguda de l'Argentina, 59, 07011 Palma" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="info-text">
+                            <strong>Nota:</strong> Para modificar la información del restaurante, edita los archivos
+                            HTML directamente.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Horarios -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Horarios</h2>
+            </div>
+            <div class="config-card">
+                <div class="horarios-grid">
+                    <div class="horario-item">
+                        <h4>Lunes y Martes</h4>
+                        <p>13:30 - 16:30</p>
+                        <p class="text-muted">Cerrado por la noche</p>
+                    </div>
+                    <div class="horario-item">
+                        <h4>Miércoles a Sábado</h4>
+                        <p>13:30 - 16:30</p>
+                        <p>20:00 - 23:30</p>
+                    </div>
+                    <div class="horario-item">
+                        <h4>Domingos</h4>
+                        <p class="text-muted">Cerrado</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estadísticas de la Base de Datos -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Estadísticas de la Base de Datos</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">📅</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Total Reservas</p>
+                        <p class="stat-value" id="stat-total-reservas">-</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(196, 155, 99, 0.1); color: #c49b63;">🍽️</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Platos en Menú</p>
+                        <p class="stat-value" id="stat-total-platos">-</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">✅</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Reservas Confirmadas</p>
+                        <p class="stat-value" id="stat-confirmadas">-</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">⏳</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Reservas Pendientes</p>
+                        <p class="stat-value" id="stat-pendientes">-</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seguridad y Protección -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Seguridad y Protección</h2>
+            </div>
+            <div class="config-card">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Límite de Reservas (Rate Limiting)</h4>
+                        <p class="text-muted">Limita el número de reservas que se pueden hacer desde la misma IP en un
+                            periodo de tiempo (máximo 3 reservas cada 15 minutos). Desactívalo solo para pruebas.</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="rate-limit-toggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div id="rate-limit-status" class="info-text" style="margin-top: 1rem;">
+                    ✅ Protección activa - Las reservas están limitadas
+                </div>
+            </div>
+        </section>
+
+        <!-- Cuenta de Administrador -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Cuenta de Administrador</h2>
+            </div>
+            <div class="config-card">
+                <div class="admin-info">
+                    <div class="admin-avatar-large">A</div>
+                    <div>
+                        <h3 id="admin-name-display">Administrador</h3>
+                        <p id="admin-email-display" class="text-muted">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 2rem;">
+                    <button class="btn btn-outline" id="cambiar-password-btn">
+                        🔒 Cambiar Contraseña
+                    </button>
+                    <p class="info-text" style="margin-top: 1rem;">
+                        Para cambiar tu contraseña, ve a la configuración de tu cuenta de Supabase.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enlaces Rápidos -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Enlaces Rápidos</h2>
+            </div>
+            <div class="config-card">
+                <div class="quick-links">
+                    <a href="../index.html" target="_blank" class="quick-link-item">
+                        <span class="quick-link-icon">🌐</span>
+                        <div>
+                            <h4>Sitio Web</h4>
+                            <p>Ver el sitio web público</p>
+                        </div>
+                    </a>
+                    <a href="https://supabase.com" target="_blank" class="quick-link-item">
+                        <span class="quick-link-icon">🗄️</span>
+                        <div>
+                            <h4>Supabase Dashboard</h4>
+                            <p>Gestionar base de datos</p>
+                        </div>
+                    </a>
+                    <a href="/admin/dashboard.html" class="quick-link-item">
+                        <span class="quick-link-icon">📊</span>
+                        <div>
+                            <h4>Dashboard</h4>
+                            <p>Ver resumen general</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Scripts -->
+    <script src="../supabase-config.js"></script>
+    <script src="../js/supabase-alias.js"></script>
+    <script src="../js/admin-auth.js"></script>
+    <script src="../js/admin-config.js"></script>
+
+</body>
+
+</html>

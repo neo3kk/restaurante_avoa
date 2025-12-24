@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SUPABASE RESERVATIONS HANDLER
  * Gestiona el envío de reservas a Supabase con protección anti-bot
  */
@@ -33,30 +33,120 @@ function checkRateLimit() {
     return { allowed: true };
 }
 
+// Validar horario de apertura del restaurante
+function validarHorario(fecha, hora) {
+    const date = new Date(fecha);
+    const diaSemana = date.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+
+    const [horas, minutos] = hora.split(':').map(Number);
+    const horaMinutos = horas * 60 + minutos;
+
+    const lang = localStorage.getItem('preferredLanguage') || 'es';
+    const t = translations[lang] || translations.es;
+
+    // Domingo (cerrado)
+    if (diaSemana === 0) {
+        return {
+            valido: false,
+            mensaje: t.cerrado_domingos
+        };
+    }
+
+    // Lunes y Martes: 13:30 - 16:30
+    if (diaSemana === 1 || diaSemana === 2) {
+        const apertura = 13 * 60 + 30; // 13:30
+        const cierre = 16 * 60 + 30;   // 16:30
+
+        if (horaMinutos < apertura || horaMinutos > cierre) {
+            return {
+                valido: false,
+                mensaje: t.horario_lunes_martes
+            };
+        }
+    }
+
+    // Miércoles a Sábado: 13:30 - 16:30 | 20:00 - 23:30
+    if (diaSemana >= 3 && diaSemana <= 6) {
+        const aperturaMediadia = 13 * 60 + 30; // 13:30
+        const cierreMediadia = 16 * 60 + 30;   // 16:30
+        const aperturaNoche = 20 * 60;         // 20:00
+        const cierreNoche = 23 * 60 + 30;      // 23:30
+
+        const enHorarioMediadia = horaMinutos >= aperturaMediadia && horaMinutos <= cierreMediadia;
+        const enHorarioNoche = horaMinutos >= aperturaNoche && horaMinutos <= cierreNoche;
+
+        if (!enHorarioMediadia && !enHorarioNoche) {
+            return {
+                valido: false,
+                mensaje: t.horario_miercoles_sabado
+            };
+        }
+    }
+
+    return { valido: true };
+}
+
 // Función para enviar reserva con protección anti-bot
 async function submitReservation(formData) {
     try {
-        const lang = getCurrentLanguage();
+        const lang = localStorage.getItem('preferredLanguage') || 'es';
 
-        // Obtener token de reCAPTCHA si está configurado
+        // 1. Obtener token de reCAPTCHA si está configurado
         let recaptchaToken = null;
         if (typeof getRecaptchaToken === 'function') {
+            console.log('🔐 Obteniendo token de reCAPTCHA...');
             recaptchaToken = await getRecaptchaToken('submit_reservation');
+
+            if (!recaptchaToken) {
+                console.warn('⚠️ No se pudo obtener token de reCAPTCHA');
+            }
         }
 
+        // 2. Verificar token en backend (Edge Function)
+        if (recaptchaToken) {
+            console.log('🔍 Verificando token en backend...');
+
+            try {
+                // Invocar Edge Function de Supabase
+                const { data: verifyData, error: verifyError } = await window.supabaseClient.functions.invoke('verify-recaptcha', {
+                    body: JSON.stringify({ token: recaptchaToken })
+                });
+
+                if (verifyError) {
+                    console.error('❌ Error al verificar reCAPTCHA:', verifyError);
+                    throw new Error('Error de verificación anti-bot. Por favor, recarga la página e intenta de nuevo.');
+                }
+
+                if (!verifyData || !verifyData.valid) {
+                    console.warn('⚠️ Token de reCAPTCHA inválido o score bajo');
+                    throw new Error('Verificación anti-bot fallida. Si eres humano, por favor intenta de nuevo.');
+                }
+
+                console.log(`✅ reCAPTCHA verificado - Score: ${verifyData.score}`);
+            } catch (verifyError) {
+                console.error('❌ Error en verificación de reCAPTCHA:', verifyError);
+                throw new Error('Error de verificación de seguridad. Por favor, intenta de nuevo.');
+            }
+        } else {
+            console.warn('⚠️ reCAPTCHA no configurado - Enviando sin verificación');
+        }
+
+        // 3. Preparar datos de la reserva
         const reservationData = {
             nombre: formData.nombre,
             email: formData.email,
             telefono: formData.telefono,
             fecha: formData.fecha,
+            hora: formData.hora,
             personas: parseInt(formData.personas),
             comentarios: formData.comentarios || null,
             idioma: lang,
             estado: 'pendiente',
-            recaptcha_token: recaptchaToken,
             created_at: new Date().toISOString()
         };
 
+        // 4. Insertar reserva en Supabase
+        console.log('💾 Guardando reserva en base de datos...');
         const { data, error } = await window.supabaseClient
             .from('reservas')
             .insert([reservationData])
@@ -64,9 +154,10 @@ async function submitReservation(formData) {
 
         if (error) throw error;
 
+        console.log('✅ Reserva guardada exitosamente');
         return { success: true, data };
     } catch (error) {
-        console.error('Error al enviar reserva:', error);
+        console.error('❌ Error al enviar reserva:', error);
         return { success: false, error: error.message };
     }
 }
@@ -80,23 +171,29 @@ function initializeReservationForm() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Verificar rate limiting
-        const rateLimitCheck = checkRateLimit();
-        if (!rateLimitCheck.allowed) {
-            showMessage(
-                `Por favor, espera ${rateLimitCheck.waitTime} minutos antes de intentar otra reserva.`,
-                'error'
-            );
-            return;
+
+        // Verificar rate limiting (controlado desde el panel de administración)
+        const rateLimitEnabled = localStorage.getItem('rateLimitEnabled') !== 'false';
+
+        if (rateLimitEnabled) {
+            const rateLimitCheck = checkRateLimit();
+            if (!rateLimitCheck.allowed) {
+                showMessage(
+                    `Por favor, espera ${rateLimitCheck.waitTime} minutos antes de intentar otra reserva.`,
+                    'error'
+                );
+                return;
+            }
         }
 
         // Obtener datos del formulario
         const formData = {
-            nombre: form.querySelector('input[type="text"]').value,
-            email: form.querySelector('input[type="email"]').value,
-            telefono: form.querySelector('input[type="tel"]').value,
-            fecha: form.querySelector('input[type="date"]').value,
-            personas: form.querySelector('input[type="number"]').value,
+            nombre: document.getElementById('nombre').value,
+            email: document.getElementById('email').value,
+            telefono: document.getElementById('telefono').value,
+            fecha: document.getElementById('fecha').value,
+            hora: document.getElementById('hora').value,
+            personas: document.getElementById('personas').value,
             comentarios: form.querySelector('textarea')?.value || ''
         };
 
@@ -106,14 +203,23 @@ function initializeReservationForm() {
         today.setHours(0, 0, 0, 0);
 
         if (selectedDate < today) {
-            showMessage('Por favor, selecciona una fecha válida.', 'error');
+            const lang = localStorage.getItem('preferredLanguage') || 'es';
+            const t = translations[lang] || translations.es;
+            showMessage(t.fecha_invalida, 'error');
+            return;
+        }
+
+        // Validar horario de apertura
+        const horarioValido = validarHorario(formData.fecha, formData.hora);
+        if (!horarioValido.valido) {
+            showMessage(horarioValido.mensaje, 'error');
             return;
         }
 
         // Deshabilitar botón mientras se envía
         const submitBtn = form.querySelector('button[type="submit"]');
+        if (!submitBtn) return;
         const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
         submitBtn.textContent = getTranslation('enviando') || 'Enviando...';
 
         // Enviar reserva
@@ -196,7 +302,7 @@ function showMessage(message, type = 'info') {
 
 // Función auxiliar para obtener traducciones
 function getTranslation(key) {
-    const lang = getCurrentLanguage();
+    const lang = localStorage.getItem('preferredLanguage') || 'es';
     const translations = {
         enviando: {
             es: 'Enviando...',
@@ -224,3 +330,5 @@ if (document.readyState === 'loading') {
 } else {
     initializeReservationForm();
 }
+
+

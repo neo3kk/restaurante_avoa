@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Fondo oscuro -->
+  <rect width="100" height="100" fill="#1a1a1a"/>
+  
+  <!-- Letra Delta (Λ) en dorado -->
+  <path d="M 50 20 L 75 80 L 65 80 L 50 40 L 35 80 L 25 80 Z" 
+        fill="#c49b63" 
+        stroke="#c49b63" 
+        stroke-width="2"/>
+</svg>

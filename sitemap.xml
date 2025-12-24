@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Página Principal -->
+  <url>
+    <loc>https://restauranteavoa.com/</loc>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restauranteavoa.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://restauranteavoa.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restauranteavoa.com/"/>
+  </url>
+  
+  <!-- Carta/Menú -->
+  <url>
+    <loc>https://restauranteavoa.com/carta.html</loc>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restauranteavoa.com/carta.html"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://restauranteavoa.com/carta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restauranteavoa.com/carta.html"/>
+  </url>
+  
+  <!-- Política de Privacidad -->
+  <url>
+    <loc>https://restauranteavoa.com/privacidad.html</loc>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+</urlset>
