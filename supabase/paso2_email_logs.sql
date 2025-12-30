@@ -4,7 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS public.email_logs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    reserva_id UUID REFERENCES public.reservas(id) ON DELETE CASCADE,
+    reserva_id UUID REFERENCES public.reservas(id) ON DELETE SET NULL,
     tipo TEXT NOT NULL CHECK (tipo IN ('confirmacion', 'recordatorio', 'notificacion', 'cancelacion')),
     destinatario TEXT NOT NULL,
     asunto TEXT NOT NULL,

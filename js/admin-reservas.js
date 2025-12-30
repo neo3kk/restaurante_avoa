@@ -322,7 +322,28 @@ async function confirmarReserva(id) {
 
         if (error) throw error;
 
-        mostrarToast('Reserva confirmada', 'success');
+        // Enviar email de confirmación al cliente
+        try {
+            console.log('📧 Enviando email de confirmación al cliente...');
+            const { error: emailError } = await supabase.functions.invoke('send-reservation-email', {
+                body: JSON.stringify({
+                    reservaId: id,
+                    tipo: 'confirmada'
+                })
+            });
+
+            if (emailError) {
+                console.warn('⚠️ Error al enviar email:', emailError);
+                mostrarToast('Reserva confirmada (email no enviado)', 'warning');
+            } else {
+                console.log('✅ Email de confirmación enviado');
+                mostrarToast('Reserva confirmada y email enviado al cliente', 'success');
+            }
+        } catch (emailError) {
+            console.warn('⚠️ Error al enviar email:', emailError);
+            mostrarToast('Reserva confirmada (email no enviado)', 'warning');
+        }
+
         await cargarReservas();
     } catch (error) {
         console.error('Error confirmando reserva:', error);

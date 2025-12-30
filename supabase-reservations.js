@@ -155,6 +155,43 @@ async function submitReservation(formData) {
         if (error) throw error;
 
         console.log('✅ Reserva guardada exitosamente');
+
+        // 5. Enviar emails de confirmación
+        try {
+            console.log('📧 Enviando emails de confirmación...');
+
+            // Email al cliente (reserva recibida, pendiente de confirmación)
+            const { error: emailClienteError } = await window.supabaseClient.functions.invoke('send-reservation-email', {
+                body: JSON.stringify({
+                    reservaId: data[0].id,
+                    tipo: 'recibida'
+                })
+            });
+
+            if (emailClienteError) {
+                console.warn('⚠️ Error al enviar email al cliente:', emailClienteError);
+            } else {
+                console.log('✅ Email enviado al cliente (reserva recibida)');
+            }
+
+            // Email de notificación al restaurante
+            const { error: emailRestauranteError } = await window.supabaseClient.functions.invoke('send-reservation-email', {
+                body: JSON.stringify({
+                    reservaId: data[0].id,
+                    tipo: 'notificacion'
+                })
+            });
+
+            if (emailRestauranteError) {
+                console.warn('⚠️ Error al enviar notificación al restaurante:', emailRestauranteError);
+            } else {
+                console.log('✅ Notificación enviada al restaurante');
+            }
+        } catch (emailError) {
+            // No fallar la reserva si hay error en emails
+            console.warn('⚠️ Error al enviar emails (reserva guardada correctamente):', emailError);
+        }
+
         return { success: true, data };
     } catch (error) {
         console.error('❌ Error al enviar reserva:', error);

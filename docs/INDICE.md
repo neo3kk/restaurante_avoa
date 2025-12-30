@@ -61,6 +61,7 @@ docs/
 |-----------|-------------|-----------|
 | [`INICIO_RAPIDO.md`](guias/INICIO_RAPIDO.md) | ⭐ Guía de inicio rápido | 🔴 Alta |
 | [`GUIA_DESPLIEGUE_RECAPTCHA.md`](guias/GUIA_DESPLIEGUE_RECAPTCHA.md) | ⭐ Despliegue de Edge Function reCAPTCHA | 🔴 Alta |
+| [`GUIA_NOTIFICACIONES_EMAIL.md`](guias/GUIA_NOTIFICACIONES_EMAIL.md) | ⭐ Sistema de notificaciones por email | 🔴 Alta |
 | [`ESTRATEGIA_SEO.md`](guias/ESTRATEGIA_SEO.md) | Estrategia de SEO y posicionamiento | 🟡 Media |
 | [`SEGURIDAD.md`](guias/SEGURIDAD.md) | Guía de seguridad general | 🟡 Media |
 
