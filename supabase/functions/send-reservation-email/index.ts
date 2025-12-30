@@ -237,7 +237,11 @@ const getEmailTemplate = (tipo: string, reserva: ReservaData, idioma: string) =>
           <p style="color: #666; margin: 5px 0;">Pescado y Marisco Fresco de Galicia</p>
         </div>
         <div class="content">
-          <p><strong>${t.hola} ${reserva.nombre},</strong></p>
+          ${tipo === 'notificacion' ? `
+            <p><strong>Hola Equipo,</strong></p>
+          ` : `
+            <p><strong>${t.hola} ${reserva.nombre},</strong></p>
+          `}
           
           ${tipo === 'recibida' ? `
             <p>${t.gracias_recibida}</p>
