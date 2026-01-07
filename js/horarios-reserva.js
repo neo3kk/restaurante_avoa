@@ -62,15 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         select.disabled = false;
 
-        // Lunes y Martes: 13:30 - 16:30
+        // Lunes y Martes: 13:30 - 15:00 (solo mediodía)
         if (diaSemana === 1 || diaSemana === 2) {
-            agregarOpcionesHorario(select, 13, 30, 16, 30);
+            agregarOpcionesHorario(select, 13, 30, 15, 0);
         }
 
-        // Miércoles a Sábado: 13:30 - 16:30 | 20:00 - 23:30
+        // Miércoles a Sábado: 13:30 - 15:00 | 20:00 - 23:00
         if (diaSemana >= 3 && diaSemana <= 6) {
             // Turno de mediodía
-            agregarOpcionesHorario(select, 13, 30, 16, 30);
+            agregarOpcionesHorario(select, 13, 30, 15, 0);
 
             // Separador
             const separador = document.createElement('option');
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             select.appendChild(separador);
 
             // Turno de noche
-            agregarOpcionesHorario(select, 20, 0, 23, 30);
+            agregarOpcionesHorario(select, 20, 0, 23, 0);
         }
     }
 

@@ -9,7 +9,7 @@ const translations = {
 
         // Hero
         hero_title: "La Esencia del",
-        hero_highlight: "Mediterráneo",
+        hero_highlight: "Atlántico",
         hero_subtitle: "Pescado y marisco fresco en el corazón de Palma de Mallorca.",
         btn_reservar_mesa: "Reservar Mesa",
         btn_ver_carta: "Ver Carta",
@@ -35,7 +35,7 @@ const translations = {
         contact_intro: "Estamos ubicados en el centro histórico de Palma.",
         contact_direccion: "Dirección",
         contact_horario: "Horario",
-        contact_horario_text: "Lunes y Martes: 13:30 - 16:30<br>Miércoles a Sábado: 13:30 - 16:30 | 20:00 - 23:30<br>Domingo: Cerrado",
+        contact_horario_text: "Lunes y Martes: 13:30 - 15:00<br>Miércoles a Sábado: 13:30 - 15:00 | 20:00 - 23:00<br>Domingo: Cerrado",
         contact_contacto: "Contacto",
         contact_form_title: "Hacer una Reserva",
         form_nombre: "Nombre",
@@ -50,8 +50,8 @@ const translations = {
         // Mensajes de validación de horarios
         cerrado_domingos: "Cerrado los domingos",
         selecciona_hora: "Selecciona una hora",
-        horario_lunes_martes: "Lunes y martes abrimos de 13:30 a 16:30.",
-        horario_miercoles_sabado: "Miércoles a sábado abrimos de 13:30 a 16:30 y de 20:00 a 23:30.",
+        horario_lunes_martes: "Lunes y martes abrimos de 13:30 a 15:00 (última reserva).",
+        horario_miercoles_sabado: "Miércoles a sábado abrimos de 13:30 a 15:00 y de 20:00 a 23:00 (última reserva).",
         fecha_invalida: "Por favor, selecciona una fecha válida.",
 
         // Footer
@@ -121,7 +121,7 @@ const translations = {
 
         // Hero
         hero_title: "L'Essència del",
-        hero_highlight: "Mediterrani",
+        hero_highlight: "Atlàntic",
         hero_subtitle: "Peix i marisc fresc al cor de Palma de Mallorca.",
         btn_reservar_mesa: "Reservar Taula",
         btn_ver_carta: "Veure Carta",
@@ -147,7 +147,7 @@ const translations = {
         contact_intro: "Estem ubicats al centre històric de Palma.",
         contact_direccion: "Adreça",
         contact_horario: "Horari",
-        contact_horario_text: "Dilluns i Dimarts: 13:30 - 16:30<br>Dimecres a Dissabte: 13:30 - 16:30 | 20:00 - 23:30<br>Diumenge: Tancat",
+        contact_horario_text: "Dilluns i Dimarts: 13:30 - 15:00<br>Dimecres a Dissabte: 13:30 - 15:00 | 20:00 - 23:00<br>Diumenge: Tancat",
         contact_contacto: "Contacte",
         contact_form_title: "Fer una Reserva",
         form_nombre: "Nom",
@@ -162,8 +162,8 @@ const translations = {
         // Missatges de validació d'horaris
         cerrado_domingos: "Tancat els diumenges",
         selecciona_hora: "Selecciona una hora",
-        horario_lunes_martes: "Dilluns i dimarts obrim de 13:30 a 16:30.",
-        horario_miercoles_sabado: "Dimecres a dissabte obrim de 13:30 a 16:30 i de 20:00 a 23:30.",
+        horario_lunes_martes: "Dilluns i dimarts obrim de 13:30 a 15:00 (última reserva).",
+        horario_miercoles_sabado: "Dimecres a dissabte obrim de 13:30 a 15:00 i de 20:00 a 23:00 (última reserva).",
         fecha_invalida: "Si us plau, selecciona una data vàlida.",
 
         // Footer
@@ -233,7 +233,7 @@ const translations = {
 
         // Hero
         hero_title: "The Essence of the",
-        hero_highlight: "Mediterranean",
+        hero_highlight: "Atlantic",
         hero_subtitle: "Fresh fish and seafood in the heart of Palma de Mallorca.",
         btn_reservar_mesa: "Book a Table",
         btn_ver_carta: "View Menu",
@@ -259,7 +259,7 @@ const translations = {
         contact_intro: "We are located in the historic center of Palma.",
         contact_direccion: "Address",
         contact_horario: "Hours",
-        contact_horario_text: "Monday & Tuesday: 1:30 PM - 4:30 PM<br>Wednesday to Saturday: 1:30 PM - 4:30 PM | 8:00 PM - 11:30 PM<br>Sunday: Closed",
+        contact_horario_text: "Monday & Tuesday: 1:30 PM - 3:00 PM<br>Wednesday to Saturday: 1:30 PM - 3:00 PM | 8:00 PM - 11:00 PM<br>Sunday: Closed",
         contact_contacto: "Contact",
         contact_form_title: "Make a Reservation",
         form_nombre: "Name",
@@ -274,8 +274,8 @@ const translations = {
         // Schedule validation messages
         cerrado_domingos: "Closed on Sundays",
         selecciona_hora: "Select a time",
-        horario_lunes_martes: "Monday and Tuesday we open from 1:30 PM to 4:30 PM.",
-        horario_miercoles_sabado: "Wednesday to Saturday we open from 1:30 PM to 4:30 PM and from 8:00 PM to 11:30 PM.",
+        horario_lunes_martes: "Monday and Tuesday we open from 1:30 PM to 3:00 PM (last reservation).",
+        horario_miercoles_sabado: "Wednesday to Saturday we open from 1:30 PM to 3:00 PM and from 8:00 PM to 11:00 PM (last reservation).",
         fecha_invalida: "Please select a valid date.",
 
         // Footer

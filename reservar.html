@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- SEO Meta Tags -->
+    <title>Reservar Mesa - Restaurante Avoa | Palma de Mallorca</title>
+    <meta name="description"
+        content="Reserva tu mesa en Restaurante Avoa. Pescado y marisco fresco en el centro de Palma de Mallorca. Reserva online fácil y rápida.">
+    <meta name="keywords"
+        content="reservar restaurante Palma, reserva online Mallorca, reservar mesa pescado Palma, reserva Restaurante Avoa">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://restauranteavoa.com/reservar.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://restauranteavoa.com/reservar.html">
+    <meta property="og:title" content="Reservar Mesa - Restaurante Avoa">
+    <meta property="og:description" content="Reserva tu mesa en el mejor restaurante de pescado y marisco de Palma.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+    <style>
+        .reservation-page {
+            min-height: 100vh;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: var(--color-bg);
+        }
+
+        .reservation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .reservation-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .reservation-header h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .reservation-header .emoji {
+            color: var(--color-primary);
+        }
+
+        .reservation-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: var(--font-body);
+        }
+
+        .reservation-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(196, 155, 99, 0.1);
+        }
+
+        .info-card h2 {
+            font-family: var(--font-heading);
+            color: var(--color-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .info-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .info-item h3 {
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            font-family: var(--font-heading);
+        }
+
+        .info-item p {
+            color: #555;
+            line-height: 1.8;
+            font-family: var(--font-body);
+        }
+
+        .form-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(196, 155, 99, 0.1);
+        }
+
+        .form-card h2 {
+            font-family: var(--font-heading);
+            color: var(--color-secondary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .back-link:hover {
+            gap: 0.8rem;
+            background: rgba(196, 155, 99, 0.1);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .reservation-page {
+                padding-top: 100px;
+            }
+
+            .reservation-header h1 {
+                font-size: 2rem;
+            }
+
+            .reservation-header p {
+                font-size: 1rem;
+            }
+
+            .reservation-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .info-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #1e4563 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border: none;
+        }
+
+        .highlight-box h3 {
+            color: white !important;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight-box p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Mejorar el aspecto del formulario */
+        .contact-form .form-group input,
+        .contact-form .form-group select,
+        .contact-form .form-group textarea {
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form .form-group input:focus,
+        .contact-form .form-group select:focus,
+        .contact-form .form-group textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(196, 155, 99, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo" aria-label="Restaurante Avoa">ΛVOΛ</a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html#inicio" class="nav-link" data-i18n="nav_inicio">Inicio</a></li>
+                    <li><a href="index.html#nosotros" class="nav-link" data-i18n="nav_nosotros">Nosotros</a></li>
+                    <li><a href="carta.html" class="nav-link" data-i18n="nav_menu">Menú</a></li>
+                    <li><a href="reservar.html" class="nav-link btn-reserve" data-i18n="nav_reservar">Reservar</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="reservation-page">
+        <div class="reservation-container">
+            <a href="./" class="back-link">
+                ← <span data-i18n="carta_volver">Volver</span>
+            </a>
+
+            <div class="reservation-header">
+                <h1><span class="emoji">🍽️</span> Reserva tu Mesa</h1>
+                <p>Disfruta de la mejor experiencia gastronómica en el corazón de Palma de Mallorca</p>
+            </div>
+
+            <div class="reservation-content">
+                <!-- Información del Restaurante -->
+                <div class="info-card">
+                    <h2>Información</h2>
+
+                    <div class="info-item">
+                        <h3 data-i18n="contact_direccion">Dirección</h3>
+                        <p>📍 Avinguda de l'Argentina, 59<br>07011 Palma, Illes Balears</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3 data-i18n="contact_horario">Horario</h3>
+                        <p data-i18n="contact_horario_text">
+                            Lunes y Martes: 13:30 - 15:00<br>
+                            Miércoles a Sábado: 13:30 - 15:00 | 20:00 - 23:00<br>
+                            Domingo: Cerrado
+                        </p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3 data-i18n="contact_contacto">Contacto</h3>
+                        <p>
+                            📞 Tel: +34 659 02 13 02<br>
+                            📞 Tel: +34 971 28 83 60<br>
+                            📧 Email: reservas@restauranteavoa.com
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h3>🌊 Producto Fresco</h3>
+                        <p>Nuestro marisco viaja diariamente en avión desde las mejores lonjas de Galicia</p>
+                    </div>
+                </div>
+
+                <!-- Formulario de Reserva -->
+                <div class="form-card">
+                    <h2 data-i18n="contact_form_title">Hacer una Reserva</h2>
+                    <form class="contact-form" id="reservation-form">
+                        <div class="form-group">
+                            <input type="text" id="nombre" data-i18n="form_nombre" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" data-i18n="form_email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="telefono" data-i18n="form_telefono" placeholder="Teléfono" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="date" id="fecha" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="time" id="hora" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="personas" data-i18n="form_personas" placeholder="Personas" min="1"
+                                max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea data-i18n="form_comentarios" placeholder="Comentarios (opcional)" rows="3"
+                                style="resize: vertical;"></textarea>
+                        </div>
+                        <div class="form-group"
+                            style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <input type="checkbox" id="privacy-consent" required
+                                style="margin-top: 0.25rem; cursor: pointer; min-width: 18px; height: 18px;">
+                            <label for="privacy-consent"
+                                style="font-size: 0.85rem; color: #666; cursor: pointer; line-height: 1.5;">
+                                Acepto la <a href="privacidad.html" target="_blank"
+                                    style="color: var(--color-primary); text-decoration: underline;">política de
+                                    privacidad</a> y el tratamiento de mis datos personales para gestionar mi reserva. *
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width" data-i18n="btn_confirmar">Confirmar
+                            Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo" aria-label="Restaurante Avoa">ΛVOΛ</div>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="ca">CA</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.instagram.com/restauranteavoapalma/" aria-label="Instagram">IG</a>
+                <a href="https://www.facebook.com/AvoaPalmaRestaurante#" aria-label="Facebook">FB</a>
+                <a href="https://www.thefork.es/restaurante/restaurante-avoa-palma-r850719" aria-label="The fork">TF</a>
+            </div>
+            <p class="copyright" data-i18n="footer_copyright">&copy; 2024 Restaurante Avoa. Todos los derechos
+                reservados. | <a href="privacidad.html"
+                    style="color: var(--color-primary); text-decoration: none;">Política de Privacidad</a></p>
+        </div>
+    </footer>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- reCAPTCHA Configuration -->
+    <script src="recaptcha-config.js"></script>
+
+    <!-- Supabase Configuration & Scripts -->
+    <script src="supabase-config.js"></script>
+    <script src="js/horarios-reserva.js"></script>
+    <script src="supabase-reservations.js"></script>
+
+    <script src="translations.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('.nav');
+
+        mobileBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileBtn.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

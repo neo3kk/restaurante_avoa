@@ -52,10 +52,10 @@ function validarHorario(fecha, hora) {
         };
     }
 
-    // Lunes y Martes: 13:30 - 16:30
+    // Lunes y Martes: 13:30 - 15:00 (solo mediodía)
     if (diaSemana === 1 || diaSemana === 2) {
         const apertura = 13 * 60 + 30; // 13:30
-        const cierre = 16 * 60 + 30;   // 16:30
+        const cierre = 15 * 60;        // 15:00 (última reserva)
 
         if (horaMinutos < apertura || horaMinutos > cierre) {
             return {
@@ -65,12 +65,12 @@ function validarHorario(fecha, hora) {
         }
     }
 
-    // Miércoles a Sábado: 13:30 - 16:30 | 20:00 - 23:30
+    // Miércoles a Sábado: 13:30 - 15:00 | 20:00 - 23:00
     if (diaSemana >= 3 && diaSemana <= 6) {
         const aperturaMediadia = 13 * 60 + 30; // 13:30
-        const cierreMediadia = 16 * 60 + 30;   // 16:30
+        const cierreMediadia = 15 * 60;        // 15:00 (última reserva mediodía)
         const aperturaNoche = 20 * 60;         // 20:00
-        const cierreNoche = 23 * 60 + 30;      // 23:30
+        const cierreNoche = 23 * 60;           // 23:00 (última reserva cena)
 
         const enHorarioMediadia = horaMinutos >= aperturaMediadia && horaMinutos <= cierreMediadia;
         const enHorarioNoche = horaMinutos >= aperturaNoche && horaMinutos <= cierreNoche;
