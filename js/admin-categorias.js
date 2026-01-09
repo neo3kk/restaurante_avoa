@@ -315,6 +315,17 @@ async function eliminarCategoria(id) {
             return;
         }
 
+        // PRIMERO: Eliminar items asociados
+        if (count > 0) {
+            const { error: errorItems } = await supabase
+                .from('menu_items')
+                .delete()
+                .eq('categoria', cat.categoria);
+
+            if (errorItems) throw errorItems;
+        }
+
+        // SEGUNDO: Eliminar la categoría
         const { error } = await supabase
             .from('categorias_disponibilidad')
             .delete()
@@ -326,7 +337,7 @@ async function eliminarCategoria(id) {
         await cargarCategorias();
     } catch (error) {
         console.error('Error:', error);
-        mostrarToast('Error al eliminar categoría', 'error');
+        mostrarToast('Error al eliminar categoría: ' + (error.message || ''), 'error');
     }
 }
 

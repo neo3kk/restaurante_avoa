@@ -6,14 +6,67 @@
 // Estado global
 let platos = [];
 let platosFiltrados = [];
+let categorias = [];
 let paginaActual = 1;
 const platosPorPagina = 15;
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', async () => {
+    await cargarCategorias();
     await cargarPlatos();
     configurarEventListeners();
 });
+
+// Cargar categorías desde Supabase
+async function cargarCategorias() {
+    try {
+        const { data, error } = await supabase
+            .from('categorias_disponibilidad')
+            .select('*')
+            .order('orden', { ascending: true });
+
+        if (error) throw error;
+
+        categorias = data || [];
+        actualizarSelectoresCategorias();
+    } catch (error) {
+        console.error('Error cargando categorías:', error);
+    }
+}
+
+// Actualizar selectores de categorías
+function actualizarSelectoresCategorias() {
+    // Selector del filtro
+    const filterSelect = document.getElementById('filter-categoria');
+    const currentFilterValue = filterSelect.value;
+
+    // Mantener la opción "Todas"
+    filterSelect.innerHTML = '<option value="">Todas</option>';
+
+    categorias.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.categoria;
+        option.textContent = cat.nombre_es;
+        filterSelect.appendChild(option);
+    });
+
+    filterSelect.value = currentFilterValue;
+
+    // Selector del formulario
+    const formSelect = document.getElementById('plato-categoria');
+    const currentFormValue = formSelect.value;
+
+    formSelect.innerHTML = '<option value="">Selecciona una categoría</option>';
+
+    categorias.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.categoria;
+        option.textContent = cat.nombre_es;
+        formSelect.appendChild(option);
+    });
+
+    formSelect.value = currentFormValue;
+}
 
 // Cargar platos desde Supabase
 async function cargarPlatos() {
@@ -127,17 +180,8 @@ function actualizarPaginacion() {
 
 // Formatear categoría
 function formatearCategoria(categoria) {
-    const categorias = {
-        'entrantes': 'Entrantes',
-        'platos_calientes': 'Platos Calientes',
-        'pescados': 'Pescados',
-        'carnes': 'Carnes',
-        'postres': 'Postres',
-        'vino_blanco': '🍷 Vino Blanco',
-        'vino_tinto': '🍷 Vino Tinto',
-        'cava_champagne': '🥂 Cava/Champagne'
-    };
-    return categorias[categoria] || categoria;
+    const cat = categorias.find(c => c.categoria === categoria);
+    return cat ? cat.nombre_es : categoria;
 }
 
 // Formatear precio
