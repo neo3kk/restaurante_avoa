@@ -128,7 +128,7 @@
                             data-i18n="carta_entrantes">
                             Entrantes</h2>
                     </div>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="entrantes-list">
                         <li class="menu-item">
                             <span class="menu-item-name" data-i18n="empanada_gallega">Empanada Gallega</span>
                             <span class="price-line"></span>
@@ -211,7 +211,7 @@
                             data-i18n="carta_platos_calientes">
                             Platos Calientes</h2>
                     </div>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="platos-calientes-list">
                         <li class="menu-item">
                             <div style="display: flex; flex-direction: column;">
                                 <span class="menu-item-name" data-i18n="alubias">Alubias</span>
@@ -245,16 +245,10 @@
                         <span class="section-tag" data-i18n="carta_pescados">Pescados</span>
                     </div>
 
-                    <div class="fish-grid">
-                        <p class="fish-note" data-i18n="carta_fish_note">Selección fresca del día. Precio Según Mercado
-                            (PSM).</p>
-                        <span class="fish-item" data-i18n="lubina">Lubina</span>
-                        <span class="fish-item" data-i18n="rodaballo">Rodaballo</span>
-                        <span class="fish-item" data-i18n="merluza">Merluza</span>
-                        <span class="fish-item" data-i18n="lenguado">Lenguado</span>
-                        <span class="fish-item" data-i18n="gallo">Gallo</span>
-                        <span class="fish-item" data-i18n="centolla">Centolla</span>
-                        <span class="fish-item" style="grid-column: 1 / -1;" data-i18n="bogavante">Bogavante</span>
+                    <p class="fish-note" data-i18n="carta_fish_note">Selección fresca del día. Precio Según Mercado
+                        (PSM).</p>
+                    <div class="fish-grid" id="pescados-grid">
+                        <!-- Se carga dinámicamente desde Supabase -->
                     </div>
                 </section>
 
@@ -265,7 +259,7 @@
                             data-i18n="carta_carnes">
                             Carnes</h2>
                     </div>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="carnes-list">
                         <li class="menu-item">
                             <span class="menu-item-name" data-i18n="zorza_patatas">Zorza con Patatas</span>
                             <span class="price-line"></span>
@@ -297,7 +291,7 @@
                             data-i18n="carta_postres">
                             Postres</h2>
                     </div>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="postres-list">
                         <li class="menu-item">
                             <span class="menu-item-name" data-i18n="filloas">Filloas</span>
                         </li>
@@ -342,7 +336,7 @@
                     <h4
                         style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.1rem; margin-bottom: 1rem; text-align: center; font-style: italic;">
                         Godello</h4>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="vinos-blancos-godello">
                         <li class="menu-item"><span class="menu-item-name">Merayo</span><span
                                 class="price-line"></span><span class="menu-item-price">17€</span></li>
                         <li class="menu-item"><span class="menu-item-name">Polvorete</span><span
@@ -356,7 +350,7 @@
                     <h4
                         style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.1rem; margin: 2rem 0 1rem; text-align: center; font-style: italic;">
                         Albariño</h4>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="vinos-blancos-albariño">
                         <li class="menu-item"><span class="menu-item-name">Pazo Serantellos</span><span
                                 class="price-line"></span><span class="menu-item-price">17€</span></li>
                         <li class="menu-item"><span class="menu-item-name">Pazo Cilleiro</span><span
@@ -378,7 +372,7 @@
                     <h4
                         style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.1rem; margin: 2rem 0 1rem; text-align: center; font-style: italic;">
                         Verdejo</h4>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="vinos-blancos-verdejo">
                         <li class="menu-item"><span class="menu-item-name">Castillo de la Mota</span><span
                                 class="price-line"></span><span class="menu-item-price">12€</span></li>
                         <li class="menu-item"><span class="menu-item-name">Dominio de la Granadilla</span><span
@@ -391,7 +385,7 @@
                     <h3 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;"
                         data-i18n="carta_tintos">
                         Tintos</h3>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="vinos-tintos-list">
                         <li class="menu-item"><span class="menu-item-name">Pujanza</span><span
                                 class="price-line"></span><span class="menu-item-price">29€</span></li>
                         <li class="menu-item"><span class="menu-item-name">Ponte da Boga</span><span
@@ -427,7 +421,7 @@
                     <h3 style="font-family: var(--font-heading); color: var(--color-primary); font-size: 1.5rem; margin: 3rem 0 1.5rem; text-align: center;"
                         data-i18n="carta_cavas">
                         Cavas - Champagne</h3>
-                    <ul class="menu-list">
+                    <ul class="menu-list" id="cavas-champagne-list">
                         <li class="menu-item"><span class="menu-item-name">Marqués de la Concordia</span><span
                                 class="price-line"></span><span class="menu-item-price">22€</span></li>
                         <li class="menu-item"><span class="menu-item-name">Juve & Camps</span><span
@@ -481,7 +475,7 @@
     <!-- Supabase Configuration & Scripts -->
     <script src="supabase-config.js"></script>
     <script src="js/supabase-alias.js"></script>
-    <script src="supabase-menu.js"></script>
+    <script src="js/menu-loader.js"></script>
 
     <script src="translations.js"></script>
 

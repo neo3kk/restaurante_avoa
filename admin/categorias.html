@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Categorías - Restaurante Avoa Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="admin-page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ΛVOΛ</div>
+            <p class="logo-subtitle">Admin Panel</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/admin/dashboard.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="/admin/reservas.html" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">Reservas</span>
+            </a>
+            <a href="/admin/menu.html" class="nav-item">
+                <span class="nav-icon">🍽️</span>
+                <span class="nav-text">Menú</span>
+            </a>
+            <a href="/admin/categorias.html" class="nav-item active">
+                <span class="nav-icon">📂</span>
+                <span class="nav-text">Categorías</span>
+            </a>
+            <a href="/admin/configuracion.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Configuración</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-details">
+                    <p class="user-name" id="admin-name">Admin</p>
+                    <p class="user-email" id="admin-email">Loading...</p>
+                </div>
+            </div>
+            <button class="btn-logout" id="logout-btn">
+                <span>🚪</span> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="content-header">
+            <div>
+                <h1>Gestión de Categorías</h1>
+                <p class="subtitle">Controla la disponibilidad de categorías completas del menú</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="refresh-btn">
+                    <span>🔄</span> Actualizar
+                </button>
+                <button class="btn btn-primary" id="nueva-categoria-btn">
+                    <span>➕</span> Nueva Categoría
+                </button>
+            </div>
+        </header>
+
+        <!-- Info Box -->
+        <section class="content-section">
+            <div class="info-box"
+                style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 1rem; margin-bottom: 2rem; border-radius: 8px;">
+                <p style="margin: 0; color: #856404;">
+                    <strong>💡 Nota:</strong> Al desactivar una categoría, todos los platos de esa categoría
+                    desaparecerán de la carta pública,
+                    independientemente de su disponibilidad individual. Útil para categorías de temporada (ej: platos de
+                    invierno).
+                </p>
+            </div>
+        </section>
+
+        <!-- Categorías Grid -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Todas las Categorías</h2>
+                <span class="badge badge-info" id="total-categorias">0 categorías</span>
+            </div>
+
+            <div id="categorias-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <!-- Las categorías se cargarán aquí -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Editar Categoría -->
+    <div id="modal-editar" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Editar Categoría</h3>
+                <button class="modal-close" onclick="cerrarModalEditar()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-editar">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-group">
+                        <label for="edit-nombre-es">Nombre (Español) *</label>
+                        <input type="text" id="edit-nombre-es" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-nombre-ca">Nombre (Catalán)</label>
+                        <input type="text" id="edit-nombre-ca">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-nombre-en">Nombre (Inglés)</label>
+                        <input type="text" id="edit-nombre-en">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-temporada">Temporada</label>
+                        <select id="edit-temporada">
+                            <option value="todo_año">Todo el año</option>
+                            <option value="invierno">Invierno</option>
+                            <option value="verano">Verano</option>
+                            <option value="primavera">Primavera</option>
+                            <option value="otoño">Otoño</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-orden">Orden</label>
+                        <input type="number" id="edit-orden" min="0">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="cerrarModalEditar()">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarEdicion()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nueva Categoría -->
+    <div id="modal-nueva" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Categoría</h3>
+                <button class="modal-close" onclick="cerrarModalNueva()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-nueva">
+                    <div class="form-group">
+                        <label for="nueva-categoria">ID de Categoría *</label>
+                        <input type="text" id="nueva-categoria" required placeholder="ej: ensaladas" pattern="[a-z_]+">
+                        <small style="color: #666; font-size: 0.875rem;">Solo minúsculas y guiones bajos</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="nueva-nombre-es">Nombre (Español) *</label>
+                        <input type="text" id="nueva-nombre-es" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nueva-nombre-ca">Nombre (Catalán)</label>
+                        <input type="text" id="nueva-nombre-ca">
+                    </div>
+                    <div class="form-group">
+                        <label for="nueva-nombre-en">Nombre (Inglés)</label>
+                        <input type="text" id="nueva-nombre-en">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="cerrarModalNueva()">Cancelar</button>
+                <button class="btn btn-primary" onclick="crearCategoria()">Crear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Scripts -->
+    <script src="../supabase-config.js"></script>
+    <script src="../js/supabase-alias.js"></script>
+    <script src="../js/admin-auth.js"></script>
+    <script src="../js/admin-categorias.js"></script>
+
+</body>
+
+</html>

@@ -24,6 +24,8 @@ async function cargarPlatos() {
             .from('menu_items')
             .select('*')
             .order('categoria', { ascending: true })
+            .order('subcategoria', { ascending: true })
+            .order('orden', { ascending: true })
             .order('nombre_es', { ascending: true });
 
         if (error) throw error;
@@ -69,7 +71,7 @@ function renderizarPlatos() {
     const platosPagina = platosFiltrados.slice(inicio, fin);
 
     document.getElementById('total-platos').textContent =
-        `${platosFiltrados.length} plato${platosFiltrados.length !== 1 ? 's' : ''}`;
+        `${platosFiltrados.length} item${platosFiltrados.length !== 1 ? 's' : ''}`;
 
     if (platosPagina.length === 0) {
         tbody.innerHTML = `
@@ -88,9 +90,9 @@ function renderizarPlatos() {
 
     tbody.innerHTML = platosPagina.map(plato => `
         <tr>
-            <td><strong>${plato.nombre_es || '-'}</strong></td>
+            <td><strong>${plato.nombre_es || '-'}</strong>${plato.subcategoria ? ` <span class="badge badge-secondary" style="font-size: 0.75rem;">${plato.subcategoria}</span>` : ''}</td>
             <td><span class="badge badge-info">${formatearCategoria(plato.categoria)}</span></td>
-            <td><strong>${formatearPrecio(plato.precio)}</strong></td>
+            <td><strong>${formatearPrecio(plato.precio, plato.precio_mercado)}</strong></td>
             <td><span class="descripcion-preview" title="${plato.descripcion_es || ''}">${truncarTexto(plato.descripcion_es, 50)}</span></td>
             <td>${plato.disponible ? '<span class="badge badge-success">Disponible</span>' : '<span class="badge badge-danger">No disponible</span>'}</td>
             <td>
@@ -127,17 +129,20 @@ function actualizarPaginacion() {
 function formatearCategoria(categoria) {
     const categorias = {
         'entrantes': 'Entrantes',
+        'platos_calientes': 'Platos Calientes',
         'pescados': 'Pescados',
-        'mariscos': 'Mariscos',
-        'arroces': 'Arroces',
         'carnes': 'Carnes',
-        'postres': 'Postres'
+        'postres': 'Postres',
+        'vino_blanco': '🍷 Vino Blanco',
+        'vino_tinto': '🍷 Vino Tinto',
+        'cava_champagne': '🥂 Cava/Champagne'
     };
     return categorias[categoria] || categoria;
 }
 
 // Formatear precio
-function formatearPrecio(precio) {
+function formatearPrecio(precio, precioMercado) {
+    if (precioMercado) return '<span style="color: #888; font-style: italic;">PSM</span>';
     if (!precio && precio !== 0) return '-';
     return `${parseFloat(precio).toFixed(2)}€`;
 }
@@ -151,10 +156,13 @@ function truncarTexto(texto, maxLength) {
 
 // Abrir modal nuevo plato
 function abrirModalNuevoPlato() {
-    document.getElementById('modal-title').textContent = 'Nuevo Plato';
+    document.getElementById('modal-title').textContent = 'Nuevo Item';
     document.getElementById('plato-form').reset();
     document.getElementById('plato-id').value = '';
     document.getElementById('plato-disponible').checked = true;
+    document.getElementById('plato-precio-mercado').checked = false;
+    document.getElementById('plato-orden').value = 0;
+    document.getElementById('subcategoria-row').style.display = 'none';
     document.getElementById('plato-modal').style.display = 'flex';
 }
 
@@ -163,7 +171,7 @@ function editarPlato(id) {
     const plato = platos.find(p => p.id === id);
     if (!plato) return;
 
-    document.getElementById('modal-title').textContent = 'Editar Plato';
+    document.getElementById('modal-title').textContent = 'Editar Item';
     document.getElementById('plato-id').value = plato.id || '';
     document.getElementById('plato-nombre-es').value = plato.nombre_es || '';
     document.getElementById('plato-nombre-ca').value = plato.nombre_ca || '';
@@ -174,6 +182,13 @@ function editarPlato(id) {
     document.getElementById('plato-descripcion-ca').value = plato.descripcion_ca || '';
     document.getElementById('plato-descripcion-en').value = plato.descripcion_en || '';
     document.getElementById('plato-disponible').checked = plato.disponible !== false;
+    document.getElementById('plato-precio-mercado').checked = plato.precio_mercado || false;
+    document.getElementById('plato-subcategoria').value = plato.subcategoria || '';
+    document.getElementById('plato-orden').value = plato.orden || 0;
+
+    // Mostrar/ocultar subcategoría según categoría
+    const esVino = ['vino_blanco', 'vino_tinto', 'cava_champagne'].includes(plato.categoria);
+    document.getElementById('subcategoria-row').style.display = esVino ? 'flex' : 'none';
 
     document.getElementById('plato-modal').style.display = 'flex';
 }
@@ -187,12 +202,18 @@ async function guardarPlato() {
     }
 
     const id = document.getElementById('plato-id').value;
+    const precioMercado = document.getElementById('plato-precio-mercado').checked;
+    const precioValor = document.getElementById('plato-precio').value;
+
     const datos = {
         nombre_es: document.getElementById('plato-nombre-es').value.trim(),
         nombre_ca: document.getElementById('plato-nombre-ca').value.trim() || null,
         nombre_en: document.getElementById('plato-nombre-en').value.trim() || null,
         categoria: document.getElementById('plato-categoria').value,
-        precio: parseFloat(document.getElementById('plato-precio').value),
+        precio: precioMercado ? null : (precioValor ? parseFloat(precioValor) : null),
+        precio_mercado: precioMercado,
+        subcategoria: document.getElementById('plato-subcategoria').value || null,
+        orden: parseInt(document.getElementById('plato-orden').value) || 0,
         descripcion_es: document.getElementById('plato-descripcion-es').value.trim() || null,
         descripcion_ca: document.getElementById('plato-descripcion-ca').value.trim() || null,
         descripcion_en: document.getElementById('plato-descripcion-en').value.trim() || null,
@@ -207,14 +228,14 @@ async function guardarPlato() {
                 .eq('id', id);
 
             if (error) throw error;
-            mostrarToast('Plato actualizado correctamente', 'success');
+            mostrarToast('Item actualizado correctamente', 'success');
         } else {
             const { error } = await supabase
                 .from('menu_items')
                 .insert([datos]);
 
             if (error) throw error;
-            mostrarToast('Plato creado correctamente', 'success');
+            mostrarToast('Item creado correctamente', 'success');
         }
 
         cerrarModalPlato();
@@ -367,6 +388,12 @@ function configurarEventListeners() {
     document.getElementById('logout-btn').addEventListener('click', async () => {
         await supabase.auth.signOut();
         window.location.href = '/admin/login.html';
+    });
+
+    // Listener para mostrar/ocultar subcategoría según categoría
+    document.getElementById('plato-categoria').addEventListener('change', (e) => {
+        const esVino = ['vino_blanco', 'vino_tinto', 'cava_champagne'].includes(e.target.value);
+        document.getElementById('subcategoria-row').style.display = esVino ? 'flex' : 'none';
     });
 
     cargarInfoUsuario();

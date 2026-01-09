@@ -32,6 +32,10 @@
                 <span class="nav-icon">🍽️</span>
                 <span class="nav-text">Menú</span>
             </a>
+            <a href="/admin/categorias.html" class="nav-item">
+                <span class="nav-icon">📂</span>
+                <span class="nav-text">Categorías</span>
+            </a>
             <a href="/admin/configuracion.html" class="nav-item">
                 <span class="nav-icon">⚙️</span>
                 <span class="nav-text">Configuración</span>
@@ -58,14 +62,14 @@
         <header class="content-header">
             <div>
                 <h1>Gestión de Menú</h1>
-                <p class="subtitle">Administra los platos y categorías del menú</p>
+                <p class="subtitle">Administra platos, vinos y categorías del menú</p>
             </div>
             <div class="header-actions">
                 <button class="btn btn-secondary" id="refresh-btn">
                     <span>🔄</span> Actualizar
                 </button>
                 <button class="btn btn-primary" id="nuevo-plato-btn">
-                    <span>➕</span> Nuevo Plato
+                    <span>➕</span> Nuevo Item
                 </button>
             </div>
         </header>
@@ -77,12 +81,18 @@
                     <label for="filter-categoria">Categoría</label>
                     <select id="filter-categoria" class="filter-input">
                         <option value="">Todas</option>
-                        <option value="entrantes">Entrantes</option>
-                        <option value="pescados">Pescados</option>
-                        <option value="mariscos">Mariscos</option>
-                        <option value="arroces">Arroces</option>
-                        <option value="carnes">Carnes</option>
-                        <option value="postres">Postres</option>
+                        <optgroup label="Platos">
+                            <option value="entrantes">Entrantes</option>
+                            <option value="platos_calientes">Platos Calientes</option>
+                            <option value="pescados">Pescados</option>
+                            <option value="carnes">Carnes</option>
+                            <option value="postres">Postres</option>
+                        </optgroup>
+                        <optgroup label="Vinos">
+                            <option value="vino_blanco">Vino Blanco</option>
+                            <option value="vino_tinto">Vino Tinto</option>
+                            <option value="cava_champagne">Cava/Champagne</option>
+                        </optgroup>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -179,17 +189,48 @@
                             <label for="plato-categoria">Categoría *</label>
                             <select id="plato-categoria" required>
                                 <option value="">Selecciona una categoría</option>
-                                <option value="entrantes">Entrantes</option>
-                                <option value="pescados">Pescados</option>
-                                <option value="mariscos">Mariscos</option>
-                                <option value="arroces">Arroces</option>
-                                <option value="carnes">Carnes</option>
-                                <option value="postres">Postres</option>
+                                <optgroup label="Platos">
+                                    <option value="entrantes">Entrantes</option>
+                                    <option value="platos_calientes">Platos Calientes</option>
+                                    <option value="pescados">Pescados</option>
+                                    <option value="carnes">Carnes</option>
+                                    <option value="postres">Postres</option>
+                                </optgroup>
+                                <optgroup label="Vinos">
+                                    <option value="vino_blanco">Vino Blanco</option>
+                                    <option value="vino_tinto">Vino Tinto</option>
+                                    <option value="cava_champagne">Cava/Champagne</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="plato-precio">Precio (€) *</label>
-                            <input type="number" id="plato-precio" min="0" step="0.01" required>
+                            <label for="plato-precio">Precio (€)</label>
+                            <input type="number" id="plato-precio" min="0" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="form-row" id="subcategoria-row" style="display: none;">
+                        <div class="form-group">
+                            <label for="plato-subcategoria">Subcategoría (para vinos)</label>
+                            <select id="plato-subcategoria">
+                                <option value="">Ninguna</option>
+                                <option value="Godello">Godello</option>
+                                <option value="Albariño">Albariño</option>
+                                <option value="Verdejo">Verdejo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="plato-orden">Orden</label>
+                            <input type="number" id="plato-orden" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="plato-precio-mercado">
+                                Precio según mercado (PSM)
+                            </label>
                         </div>
                     </div>
 
