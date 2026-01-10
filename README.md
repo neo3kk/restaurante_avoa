@@ -1,166 +1,114 @@
-# 🍽️ RESTAURANTE AVOA - SITIO WEB OFICIAL
+﻿# ðŸ½ï¸ Restaurante Avoa - Sistema de GestiÃ³n
 
-**Restaurante de pescado y marisco fresco en Palma de Mallorca**
+Sistema completo de gestiÃ³n para Restaurante Avoa en Palma de Mallorca.
 
-[![Estado](https://img.shields.io/badge/Estado-Producción-success)](https://restauranteavoa.com)
-[![Seguridad](https://img.shields.io/badge/Seguridad-85%2F100-brightgreen)](docs/auditorias/REVISION_FINAL_SEGURIDAD.md)
-[![Documentación](https://img.shields.io/badge/Docs-Completa-blue)](docs/INDICE.md)
+## ðŸ“‹ CaracterÃ­sticas
 
----
+### âœ… GestiÃ³n de MenÃº
+- Panel de administraciÃ³n completo
+- CategorÃ­as dinÃ¡micas
+- GestiÃ³n de platos y vinos
+- Precios segÃºn mercado
+- Multiidioma (ES/CA/EN)
 
-## 📋 DESCRIPCIÓN
+### âœ… Sistema de Reservas
+- Formulario de reservas online
+- Notificaciones por email automÃ¡ticas
+- Panel de gestiÃ³n de reservas
+- Estados de reserva
 
-Sitio web moderno y seguro para Restaurante Avoa, especializado en pescado fresco y marisco de Galicia en el corazón de Palma de Mallorca.
+### âœ… Carta Digital
+- Carta dinÃ¡mica desde base de datos
+- Responsive design
+- Multiidioma
+- ActualizaciÃ³n en tiempo real
 
-### ✨ **Características Principales**
+## ðŸš€ TecnologÃ­as
 
-- 🌐 **Multiidioma:** Español, Catalán, Inglés
-- 📱 **Responsive:** Optimizado para móvil, tablet y desktop
-- 🔒 **Seguro:** Protección anti-bot con reCAPTCHA v3
-- 💾 **Base de datos:** Supabase con Row Level Security
-- 🎨 **Diseño moderno:** Interfaz elegante y profesional
-- 📊 **SEO optimizado:** Structured data y meta tags completos
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Supabase (PostgreSQL)
+- **Email:** Supabase Edge Functions
+- **Hosting:** Servidor web estÃ¡tico
 
----
-
-## 🚀 INICIO RÁPIDO
-
-### **Para Desarrollo Local**
-
-```bash
-# 1. Clonar el repositorio
-git clone [URL_DEL_REPO]
-cd restaurante_avoa
-
-# 2. Iniciar servidor local
-python -m http.server 8000
-
-# 3. Abrir en navegador
-http://localhost:8000
-```
-
-### **Para Producción**
-
-Ver guía completa: [`docs/guias/INICIO_RAPIDO.md`](docs/guias/INICIO_RAPIDO.md)
-
----
-
-## 📁 ESTRUCTURA DEL PROYECTO
+## ðŸ“ Estructura del Proyecto
 
 ```
 restaurante_avoa/
-├── index.html              # Página principal
-├── carta.html              # Carta del restaurante
-├── privacidad.html         # Política de privacidad
-├── style.css               # Estilos principales
-├── assets/                 # Imágenes y recursos
-├── js/                     # Scripts JavaScript
-├── admin/                  # Panel de administración
-├── supabase/              # Edge Functions y configuración
-└── docs/                  # 📚 Documentación completa
-    ├── INDICE.md          # ⭐ Índice de documentación
-    ├── auditorias/        # Informes de seguridad
-    ├── configuracion/     # Guías de configuración
-    └── guias/            # Guías de uso
+â”œâ”€â”€ admin/              # Panel de administraciÃ³n
+â”‚   â”œâ”€â”€ dashboard.html
+â”‚   â”œâ”€â”€ menu.html
+â”‚   â”œâ”€â”€ categorias.html
+â”‚   â”œâ”€â”€ reservas.html
+â”‚   â””â”€â”€ configuracion.html
+â”œâ”€â”€ css/                # Estilos
+â”œâ”€â”€ js/                 # Scripts JavaScript
+â”œâ”€â”€ supabase/           # ConfiguraciÃ³n de base de datos
+â”‚   â”œâ”€â”€ setup.sql
+â”‚   â”œâ”€â”€ functions/
+â”‚   â””â”€â”€ BACKUP_FACIL.sql
+â”œâ”€â”€ docs/               # DocumentaciÃ³n
+â”œâ”€â”€ backups/            # Backups de la base de datos
+â”œâ”€â”€ index.html          # PÃ¡gina principal
+â”œâ”€â”€ carta.html          # Carta digital
+â”œâ”€â”€ reservar.html       # Formulario de reservas
+â””â”€â”€ README.md           # Este archivo
 ```
 
----
+## ðŸ”§ ConfiguraciÃ³n
 
-## 📚 DOCUMENTACIÓN
+### 1. Configurar Supabase
 
-### **📖 Documentos Principales**
+1. Crea un proyecto en [Supabase](https://supabase.com)
+2. Ejecuta el script `supabase/setup.sql`
+3. Copia `supabase-config.example.js` a `supabase-config.js`
+4. Actualiza las credenciales en `supabase-config.js`
 
-| Documento | Descripción |
-|-----------|-------------|
-| **[`docs/INDICE.md`](docs/INDICE.md)** | ⭐ **Índice completo de documentación** |
-| [`docs/auditorias/REVISION_FINAL_SEGURIDAD.md`](docs/auditorias/REVISION_FINAL_SEGURIDAD.md) | Revisión final de seguridad |
-| [`docs/guias/INICIO_RAPIDO.md`](docs/guias/INICIO_RAPIDO.md) | Guía de inicio rápido |
-| [`docs/guias/GUIA_DESPLIEGUE_RECAPTCHA.md`](docs/guias/GUIA_DESPLIEGUE_RECAPTCHA.md) | Configuración de reCAPTCHA |
+### 2. Configurar Edge Functions
 
----
-
-## 🔒 SEGURIDAD
-
-### **Puntuación: 85/100** 🟢 **MUY BUENO**
-
-- ✅ reCAPTCHA v3 con verificación backend
-- ✅ Row Level Security en Supabase
-- ✅ Headers de seguridad configurados
-- ✅ Protección contra XSS y SQL injection
-- ✅ Autenticación segura para admin
-
-**Detalles:** [`docs/auditorias/REVISION_FINAL_SEGURIDAD.md`](docs/auditorias/REVISION_FINAL_SEGURIDAD.md)
-
----
-
-## 🛠️ TECNOLOGÍAS
-
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
-- **Backend:** Supabase (PostgreSQL + Edge Functions)
-- **Protección:** Google reCAPTCHA v3
-- **Hosting:** Apache/Nginx (configurable)
-- **Idiomas:** ES, CA, EN
-
----
-
-## 📊 ESTADO DEL PROYECTO
-
-| Componente | Estado | Versión |
-|------------|--------|---------|
-| **Frontend** | ✅ Producción | 1.0 |
-| **Backend** | ✅ Producción | 1.0 |
-| **Seguridad** | ✅ Auditado | 85/100 |
-| **Documentación** | ✅ Completa | 1.0 |
-
----
-
-## 🔧 CONFIGURACIÓN
-
-### **Variables de Entorno Necesarias**
-
-```javascript
-// supabase-config.js (NO incluir en Git)
-const SUPABASE_URL = 'https://xxxxx.supabase.co';
-const SUPABASE_ANON_KEY = 'tu_clave_aqui';
+```bash
+cd supabase/functions
+supabase functions deploy send-reservation-email
 ```
 
-### **Archivos de Configuración**
+### 3. Configurar Email
 
-- `supabase-config.js` - Configuración de Supabase (en `.gitignore`)
-- `recaptcha-config.js` - Clave pública de reCAPTCHA
-- `htaccess.apache` - Configuración de servidor (renombrar a `.htaccess`)
+Actualiza las plantillas de email en:
+- `supabase/functions/send-reservation-email/templates/`
 
-**Guías:** [`docs/configuracion/`](docs/configuracion/)
+## ðŸ“– DocumentaciÃ³n
+
+- **[INDICE.md](INDICE.md)** - Ãndice completo de documentaciÃ³n
+- **[GUIA_GESTION_MENU_VINOS.md](GUIA_GESTION_MENU_VINOS.md)** - GuÃ­a de gestiÃ³n de menÃº
+- **[docs/](docs/)** - DocumentaciÃ³n detallada
+
+## ðŸ’¾ Backups
+
+Para crear un backup:
+
+1. Abre Supabase SQL Editor
+2. Ejecuta `supabase/BACKUP_FACIL.sql`
+3. Guarda el resultado en `backups/`
+
+Ver: `supabase/GUIA_BACKUP_COMPLETO.md`
+
+## ðŸ” Seguridad
+
+- RLS (Row Level Security) habilitado
+- AutenticaciÃ³n requerida para admin
+- ValidaciÃ³n de formularios
+- ProtecciÃ³n CSRF
+
+## ðŸ“± Contacto
+
+- **Web:** https://restauranteavoa.com
+- **Email:** info@restauranteavoa.com
+- **TelÃ©fono:** +34 971 123 456
+
+## ðŸ“„ Licencia
+
+Â© 2025 Restaurante Avoa. Todos los derechos reservados.
 
 ---
 
-## 📞 CONTACTO
-
-**Restaurante Avoa**  
-📍 Avinguda de l'Argentina, 59, Palma, Illes Balears  
-📞 +34 659 02 13 02 | +34 971 28 83 60  
-📧 reservas@restauranteavoa.com  
-🌐 https://restauranteavoa.com
-
----
-
-## 📝 LICENCIA
-
-© 2024 Restaurante Avoa. Todos los derechos reservados.
-
----
-
-## 🎯 PRÓXIMOS PASOS
-
-1. **Configurar SSL** en servidor web
-2. **Actualizar dominios** en Google reCAPTCHA
-3. **Desplegar** a producción
-4. **Verificar** funcionamiento
-5. **Monitorear** logs y errores
-
-**Guía completa:** [`docs/INDICE.md`](docs/INDICE.md)
-
----
-
-**Desarrollado con ❤️ para Restaurante Avoa**  
-**Última actualización:** 24 de Diciembre de 2024
+**Ãšltima actualizaciÃ³n:** 2026-01-10
+**VersiÃ³n:** 1.0.0
